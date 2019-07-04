@@ -19,9 +19,9 @@ namespace Naos.Bootstrapper.Test
     /// <summary>
     /// Example of how to control how dummy objects get created.
     /// </summary>
-    #if !NaosRecipesInitializeTestProject
+    #if !NaosBootstrapperTest
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        [System.CodeDom.Compiler.GeneratedCode("Naos.Recipes.InitializeTestProject", "See package version number")]
+        [System.CodeDom.Compiler.GeneratedCode("Naos.Bootstrapper.Test", "See package version number")]
     #endif
     public class ExampleDummyFactory : IDummyFactory
     {

@@ -11,5 +11,6 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="EqualityCodeGenerationHelper.cs" target="content\net462\.recipes\Naos.Bootstrapper.Domain\EqualityCodeGenerationHelper.cs" />
   </files>
 </package>
