@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Naos.Bootstrapper.Domain</id>
+    <description>A bootstrapper for 'Domain' projects in Naos.</description>
+    <tags>naos bootstrapper</tags>
+    <dependencies>
+      <dependency id="Naos.Build.Analyzers" version ="1.55.0" />
+      <dependency id="OBeautifulCode.Type" version ="1.0.5" />
+    </dependencies>
+  </metadata>
+  <files>
+  </files>
+</package>
