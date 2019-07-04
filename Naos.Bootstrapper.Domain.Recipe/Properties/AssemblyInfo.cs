@@ -11,11 +11,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Naos.Bootstrapper.Domain")]
+[assembly: AssemblyTitle("Naos.Bootstrapper.Domain.Recipe")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Naos Project")]
-[assembly: AssemblyProduct("Naos.Bootstrapper.Domain")]
+[assembly: AssemblyProduct("Naos.Bootstrapper.Domain.Recipe")]
 [assembly: AssemblyCopyright("Copyright © Naos Project 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("91d15e74-b4f4-4c8a-ad64-81957e80dbc4")]
+[assembly: Guid("f42d5e51-bca6-4d18-bc89-fe07b85c88c3")]
 
 // Version information for an assembly consists of the following four values:
 //
