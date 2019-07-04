@@ -1,0 +1,26 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Naos.Bootstrapper.Test</id>
+    <description>A bootstrapper for 'Test' projects in Naos.</description>
+    <tags>naos bootstrapper</tags>
+    <dependencies>
+      <dependency id="AutoFixture" version="3.51.0" />
+      <dependency id="FakeItEasy" version="4.1.0" />
+      <dependency id="FluentAssertions" version="4.19.0" />
+      <dependency id="Naos.Build.Analyzers" version="1.55.0" />
+      <dependency id="OBeautifulCode.AutoFakeItEasy" version="1.0.96" />
+      <dependency id="OBeautifulCode.Type" version="1.0.5" />
+      <dependency id="StyleCop.Analyzers.Unstable" version="1.1.0.47" />
+      <dependency id="xunit" version="2.1.0" />
+      <dependency id="xunit.abstractions" version="2.0.0" />
+      <dependency id="xunit.assert" version="2.1.0" />
+      <dependency id="xunit.core" version="2.1.0" />
+      <dependency id="xunit.extensibility.core" version="2.1.0" />
+      <dependency id="xunit.extensibility.execution" version="2.1.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="ExampleDummyFactory.cs" target="content\net462\.recipes\Naos.Bootstrapper.Test\ExampleDummyFactory.cs" />
+  </files>
+</package>
