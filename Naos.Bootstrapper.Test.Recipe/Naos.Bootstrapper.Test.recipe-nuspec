@@ -22,5 +22,6 @@
   </metadata>
   <files>
     <file src="ExampleDummyFactory.cs" target="content\net462\.recipes\Naos.Bootstrapper.Test\ExampleDummyFactory.cs" />
+    <file src="EqualityCodeGenerationHelper.cs" target="content\net462\.recipes\Naos.Bootstrapper.Test\EqualityCodeGenerationHelper.cs" />
   </files>
 </package>

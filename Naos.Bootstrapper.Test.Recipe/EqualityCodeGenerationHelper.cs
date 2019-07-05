@@ -7,14 +7,14 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Naos.Bootstrapper.Domain
+namespace Naos.Bootstrapper.Test
 {
     /// <summary>
     /// Helper methods for creating object equality and hash code text via reflection.
     /// </summary>
-    #if !NaosBootstrapperDomain
+    #if !NaosBootstrapperTest
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        [System.CodeDom.Compiler.GeneratedCode("Naos.Bootstrapper.Domain", "See package version number")]
+        [System.CodeDom.Compiler.GeneratedCode("Naos.Bootstrapper.Test", "See package version number")]
     #endif
     public class EqualityCodeGenerationHelper
     {
