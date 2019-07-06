@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F42D5E51-BCA6-4D18-BC89-FE07B85C88C3}</ProjectGuid>
+    <ProjectGuid>{398EC655-7D72-4866-B695-F9D28FEDD05C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Naos.Bootstrapper.Domain.Recipe</RootNamespace>
-    <AssemblyName>Naos.Bootstrapper.Domain.Recipe</AssemblyName>
+    <RootNamespace>Naos.Bootstrapper.Feature.Recipe</RootNamespace>
+    <AssemblyName>Naos.Bootstrapper.Feature.Recipe</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -20,19 +20,21 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>NaosBootstrapperDomain</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Naos.Bootstrapper.Domain.Recipe.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Naos.Bootstrapper.Feature.Recipe.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>NaosBootstrapperTest</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Naos.Bootstrapper.Domain.Recipe.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Naos.Bootstrapper.Feature.Recipe.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OBeautifulCode.Type, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
@@ -47,7 +49,7 @@
   <ItemGroup>
     <AdditionalFiles Include=".analyzers\stylecop.json" />
     <None Include=".analyzers\release.ruleset" />
-    <None Include="Naos.Bootstrapper.Domain.recipe-nuspec">
+    <None Include="Naos.Bootstrapper.Feature.recipe-nuspec">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
@@ -60,11 +62,11 @@
     <Content Include=".analyzers\dictionary.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Naos.Build.Analyzers.1.55.0\build\Naos.Build.Analyzers.targets" Condition="Exists('..\packages\Naos.Build.Analyzers.1.55.0\build\Naos.Build.Analyzers.targets')" />
+  <Import Project="..\packages\Naos.Build.Analyzers.1.55.1\build\Naos.Build.Analyzers.targets" Condition="Exists('..\packages\Naos.Build.Analyzers.1.55.1\build\Naos.Build.Analyzers.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Naos.Build.Analyzers.1.55.0\build\Naos.Build.Analyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Naos.Build.Analyzers.1.55.0\build\Naos.Build.Analyzers.targets'))" />
+    <Error Condition="!Exists('..\packages\Naos.Build.Analyzers.1.55.1\build\Naos.Build.Analyzers.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Naos.Build.Analyzers.1.55.1\build\Naos.Build.Analyzers.targets'))" />
   </Target>
 </Project>
