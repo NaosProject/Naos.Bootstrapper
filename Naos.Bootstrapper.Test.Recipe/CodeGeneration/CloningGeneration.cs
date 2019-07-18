@@ -156,12 +156,12 @@ namespace Naos.Bootstrapper.Test.CodeGeneration
                                                                     var resultAssert = _.ParameterType.GenerateFluentEqualityStatement(
                                                                         Invariant($"actual.{_.Name.ToUpperFirstLetter()}"),
                                                                         Invariant($"{sourceName}.{_.Name.ToUpperFirstLetter()}"));
-                                                                    if (!parameter.ParameterType.IsValueType && parameter.ParameterType != typeof(string))
+                                                                    if (_.Name != parameter.Name && !_.ParameterType.IsValueType && _.ParameterType != typeof(string))
                                                                     {
                                                                         resultAssert +=
                                                                             Environment.NewLine
                                                                           + Invariant(
-                                                                                $"actual.{_.Name.ToUpperFirstLetter()}.Should().NotBeSameAs({sourceName}.{_.Name.ToUpperFirstLetter()});");
+                                                                                $"               actual.{_.Name.ToUpperFirstLetter()}.Should().NotBeSameAs({sourceName}.{_.Name.ToUpperFirstLetter()});");
                                                                     }
 
                                                                     return resultAssert;
