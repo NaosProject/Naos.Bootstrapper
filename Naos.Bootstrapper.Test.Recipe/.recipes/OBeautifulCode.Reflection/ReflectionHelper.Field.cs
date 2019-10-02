@@ -11,10 +11,10 @@ namespace OBeautifulCode.Reflection.Recipes
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Reflection;
 
+    using OBeautifulCode.Type.Recipes;
     using OBeautifulCode.Validation.Recipes;
 
     /// <summary>
@@ -39,7 +39,7 @@ namespace OBeautifulCode.Reflection.Recipes
         /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
         public static bool HasField(
             this object item,
             string fieldName,
@@ -52,7 +52,7 @@ namespace OBeautifulCode.Reflection.Recipes
         /// <param name="type">The type.</param>
         /// <param name="bindingFlags">The binding flags to use.</param>
         /// <returns>Collection of property names.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
         public static IReadOnlyCollection<string> GetFieldNames(
             this Type type,
             BindingFlags bindingFlags = DefaultBindingFlags)
@@ -78,8 +78,8 @@ namespace OBeautifulCode.Reflection.Recipes
         /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
         /// <exception cref="InvalidOperationException">The field was not found.</exception>
         /// <exception cref="InvalidCastException">The field is not of type T.</exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
         public static T GetFieldValue<T>(
             this Type type,
             string fieldName,
@@ -115,8 +115,8 @@ namespace OBeautifulCode.Reflection.Recipes
         /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
         /// <exception cref="InvalidOperationException">The field was not found.</exception>
         /// <exception cref="InvalidCastException">The field is not of type T.</exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
         public static T GetFieldValue<T>(
             this object item,
             string fieldName,
@@ -150,8 +150,8 @@ namespace OBeautifulCode.Reflection.Recipes
         /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
         /// <exception cref="InvalidOperationException">The field was not found.</exception>
         /// <exception cref="InvalidCastException">The property is not of type T.</exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
         public static void SetFieldValue<T>(
             this Type type,
             string fieldName,
@@ -185,8 +185,8 @@ namespace OBeautifulCode.Reflection.Recipes
         /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
         /// <exception cref="InvalidOperationException">The field was not found.</exception>
         /// <exception cref="InvalidCastException">The property is not of type T.</exception>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
         public static void SetFieldValue<T>(
             this object item,
             string fieldName,
@@ -207,7 +207,7 @@ namespace OBeautifulCode.Reflection.Recipes
             fi.SetFieldValue(item, value);
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
         private static T GetFieldValue<T>(
             this FieldInfo fi,
             object item)
@@ -224,7 +224,7 @@ namespace OBeautifulCode.Reflection.Recipes
 
                 if (value == null)
                 {
-                    // can't solely rely on the ( T ) cast - if fi.GetValue returns null, then null can be casted to any reference type.
+                    // can't solely rely on the ( T ) cast - if fi.GetValue returns null, then null can be cast to any reference type.
                     if (!fi.FieldType.IsAssignableTo(returnType))
                     {
                         throw new InvalidCastException($"Unable to cast object of type '{fi.FieldType.FullName}' to type '{returnType.FullName}'.");
@@ -242,7 +242,7 @@ namespace OBeautifulCode.Reflection.Recipes
             }
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
         private static void SetFieldValue<T>(
             this FieldInfo fi,
             object item,

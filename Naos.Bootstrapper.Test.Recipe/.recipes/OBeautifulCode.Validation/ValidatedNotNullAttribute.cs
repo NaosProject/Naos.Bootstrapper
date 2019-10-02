@@ -10,7 +10,6 @@
 namespace OBeautifulCode.Validation.Recipes
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Attribute that avoids false positives of Code Analysis rule CA1062.
@@ -21,7 +20,7 @@ namespace OBeautifulCode.Validation.Recipes
     [AttributeUsage(AttributeTargets.Parameter)]
 #if !OBeautifulCodeValidationRecipesProject
     [System.Diagnostics.DebuggerStepThrough]
-    [ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Validation", "See package version number")]
     internal
 #else

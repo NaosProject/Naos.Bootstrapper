@@ -11,14 +11,13 @@ namespace OBeautifulCode.Validation.Recipes
 {
     using System;
     using System.Collections;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Extension methods.
     /// </summary>
 #if !OBeautifulCodeValidationRecipesProject
     [System.Diagnostics.DebuggerStepThrough]
-    [ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Validation", "See package version number")]
     internal
 #else

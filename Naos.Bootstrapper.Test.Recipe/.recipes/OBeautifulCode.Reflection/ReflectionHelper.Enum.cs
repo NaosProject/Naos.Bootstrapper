@@ -11,7 +11,6 @@ namespace OBeautifulCode.Reflection.Recipes
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     using OBeautifulCode.Enum.Recipes;
@@ -43,8 +42,8 @@ namespace OBeautifulCode.Reflection.Recipes
         /// enum values have that attribute.
         /// </returns>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an enum.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is not needed.")]
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is not needed.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
         public static IReadOnlyCollection<TEnum> GetEnumValuesHaving<TEnum, TAttribute>(
             Func<TAttribute, bool> attributeFilter = null)
             where TEnum : struct
@@ -83,8 +82,8 @@ namespace OBeautifulCode.Reflection.Recipes
         /// enum values have that attribute.
         /// </returns>
         /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an enum.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is not needed.")]
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The type parameter is not needed.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
         public static IReadOnlyCollection<Enum> GetEnumValuesHaving<TAttribute>(
             this Type enumType,
             Func<TAttribute, bool> attributeFilter = null)

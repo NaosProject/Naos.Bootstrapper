@@ -11,7 +11,6 @@ namespace OBeautifulCode.Reflection.Recipes
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Reflection;
 
@@ -21,7 +20,7 @@ namespace OBeautifulCode.Reflection.Recipes
     /// Provides useful methods related to reflection.
     /// </summary>
 #if !OBeautifulCodeReflectionRecipesProject
-    [ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Reflection", "See package version number")]
     internal
 #else
@@ -32,7 +31,7 @@ namespace OBeautifulCode.Reflection.Recipes
         /// <summary>
         /// Default binding flags used for all methods.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
         public const BindingFlags DefaultBindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
 
         /// <summary>

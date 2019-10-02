@@ -5,8 +5,9 @@
     <description>A bootstrapper for 'Feature' projects in Naos.</description>
     <tags>naos bootstrapper</tags>
     <dependencies>
-      <dependency id="Naos.Build.Analyzers" version="1.55.1" />
-      <dependency id="OBeautifulCode.Type" version="1.0.5" />
+      <dependency id="Naos.Build.Analyzers" version="1.55.0" />
+      <dependency id="OBeautifulCode.Type" version="1.0.17" />
+      <dependency id="OBeautifulCode.Type.Recipes.TypeExtensions" version="1.0.17" />
       <dependency id="StyleCop.Analyzers.Unstable" version="1.1.0.47" />
     </dependencies>
   </metadata>

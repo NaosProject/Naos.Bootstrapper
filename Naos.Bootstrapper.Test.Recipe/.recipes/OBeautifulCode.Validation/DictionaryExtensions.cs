@@ -12,7 +12,7 @@ namespace OBeautifulCode.Validation.Recipes
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
+
     using static System.FormattableString;
 
     /// <summary>
@@ -20,7 +20,7 @@ namespace OBeautifulCode.Validation.Recipes
     /// </summary>
 #if !OBeautifulCodeValidationRecipesProject
     [System.Diagnostics.DebuggerStepThrough]
-    [ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Validation", "See package version number")]
     internal
 #else
