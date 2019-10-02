@@ -34,7 +34,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="ExampleDummyFactory.cs" target="content\net462\.recipes\Naos.Bootstrapper.Test\ExampleDummyFactory.cs" />
+    <file src="BootstrapperDummyFactory.cs" target="content\net462\.recipes\Naos.Bootstrapper.Test\BootstrapperDummyFactory.cs" />
     <file src="TestRunner.cs" target="content\net462\.recipes\Naos.Bootstrapper.Test\TestRunner.cs" />
   </files>
 </package>
