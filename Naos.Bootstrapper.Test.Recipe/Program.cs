@@ -10,9 +10,15 @@
 namespace Naos.Bootstrapper.Test
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using CLAP;
+    using OBeautifulCode.Collection.Recipes;
+    using OBeautifulCode.Reflection.Recipes;
+    using OBeautifulCode.Representation.System;
+    using OBeautifulCode.Type.Recipes;
+    using OBeautifulCode.Validation.Recipes;
 
     /// <summary>
     /// Main entry point of the application.
@@ -52,6 +58,11 @@ namespace Naos.Bootstrapper.Test
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1053:StaticHolderTypesShouldNotHaveConstructors", Justification = "Must not be static for CLAP.")]
     public class ConsoleAbstraction
     {
+        private static IReadOnlyCollection<TypeRepresentation> ExceptionTypeDescriptionsToOnlyPrintMessage => new[]
+                                                                                                           {
+                                                                                                               typeof(TestFailedException).ToRepresentation()
+                                                                                                           };
+
         [Verb(Aliases = "run", IsDefault = false, Description = "Runs the specified type's xUnit tests.")]
         public static void RunTestsInType(
             [Aliases("")] [Description("Name of type to run tests in.")] string typeName,
@@ -64,11 +75,95 @@ namespace Naos.Bootstrapper.Test
 
             var testAssembly = typeof(Program).Assembly;
 
-            var type = testAssembly.GetTypes().Single(_ => _?.FullName?.Contains(typeName) ?? false);
+            var types = testAssembly.GetTypes().Where(_ => !TypeHelper.IsAnonymous(_)).ToList();
+            var typeCandidates = types.Where(_ => _?.FullName?.Contains(typeName) ?? false);
+
+            typeCandidates.Named(nameof(typeCandidates)).Must().NotBeEmptyEnumerable();
+            typeCandidates.Count().Named("candidates").Must().BeEqualTo(1);
+            var testType = typeCandidates.Single();
+
+            bool success;
             using (var runner = new TestRunner(Console.WriteLine))
             {
-                runner.RunAllTestsInType(type);
+                success = runner.RunAllTestsInType(testType);
             }
+
+            if (!success)
+            {
+                throw new TestFailedException(testType);
+            }
+        }
+
+        /// <summary>
+        /// Error method to call from CLAP; a 1 will be returned as the exit code if this is entered since an exception was thrown.
+        /// </summary>
+        /// <param name="context">Context provided with details.</param>
+        [Error]
+#pragma warning disable CS3001 // Argument type is not CLS-compliant - needed for CLAP
+        public static void Error(ExceptionContext context)
+#pragma warning restore CS3001 // Argument type is not CLS-compliant
+        {
+            new { context }.Must().NotBeNull();
+            var typeDescriptionComparer = new TypeComparer(TypeMatchStrategy.NamespaceAndName);
+
+            // change color to red
+            var originalColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            // parser exception or
+            if (context.Exception is CommandLineParserException)
+            {
+                Console.WriteLine("Failure parsing command line arguments.  Run the exe with the 'help' command for usage.");
+                Console.WriteLine("   " + context.Exception.Message);
+            }
+            else if ((ExceptionTypeDescriptionsToOnlyPrintMessage ?? new TypeRepresentation[0]).Any(_ => typeDescriptionComparer.Equals(_, context.Exception.GetType().ToRepresentation())))
+            {
+                Console.WriteLine("Failure during execution; configured to omit stack trace.");
+                Console.WriteLine(string.Empty);
+                Console.WriteLine("   " + context.Exception.Message);
+            }
+            else
+            {
+                Console.WriteLine("Failure during execution.");
+                Console.WriteLine("   " + context.Exception.Message);
+                Console.WriteLine(string.Empty);
+                Console.WriteLine("   " + context.Exception);
+            }
+
+            // restore color
+            Console.WriteLine();
+            Console.ForegroundColor = originalColor;
+        }
+
+        /// <summary>
+        /// Help method to call from CLAP.
+        /// </summary>
+        /// <param name="helpText">Generated help text to display.</param>
+        [Empty]
+        [Help(Aliases = "h,?,-h,-help")]
+        [Verb(Aliases = "help", IsDefault = true)]
+        public static void ShowUsage(string helpText)
+        {
+            new { helpText }.Must().NotBeNull();
+
+            Console.WriteLine("   Usage");
+            Console.Write("   -----");
+
+            // strip out the usage info about help, it's confusing
+            helpText = helpText.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Skip(3).ToNewLineDelimited();
+            Console.WriteLine(helpText);
+            Console.WriteLine();
+        }
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors", Justification = "Need custom exception only for stacktrace printing suppression.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Need custom exception only for stacktrace printing suppression.")]
+    public class TestFailedException : Exception
+    {
+        public TestFailedException(
+            Type testType)
+            : base(FormattableString.Invariant($"One or more tests in '{TypeExtensions.ToStringReadable(testType, ToStringReadableOptions.IncludeNamespace)}' failed, see output for details."))
+        {
         }
     }
 }
