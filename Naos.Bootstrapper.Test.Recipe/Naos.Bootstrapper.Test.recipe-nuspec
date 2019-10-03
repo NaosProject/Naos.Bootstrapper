@@ -37,6 +37,6 @@
   <files>
     <file src="BootstrapperDummyFactory.cs" target="content\net462\.recipes\Naos.Bootstrapper.Test\BootstrapperDummyFactory.cs" />
     <file src="TestRunner.cs" target="content\net462\.recipes\Naos.Bootstrapper.Test\TestRunner.cs" />
-    <file src="Program.cs" target="Program.cs" />
+    <file src="Program.cs" target="content\net462\Program.cs" />
   </files>
 </package>
