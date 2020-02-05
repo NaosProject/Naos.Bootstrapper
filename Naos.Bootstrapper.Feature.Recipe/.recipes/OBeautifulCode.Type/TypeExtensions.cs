@@ -12,6 +12,7 @@ namespace OBeautifulCode.Type.Recipes
     using System;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -34,34 +35,37 @@ namespace OBeautifulCode.Type.Recipes
 #endif
     static class TypeExtensions
     {
-        private static readonly Type[] CollectionTypes =
-        {
-            typeof(Collection<>),
-            typeof(ICollection<>),
-            typeof(ReadOnlyCollection<>),
-            typeof(IReadOnlyCollection<>),
-            typeof(List<>),
-            typeof(IList<>),
-            typeof(IReadOnlyList<>)
-        };
+        private static readonly HashSet<Type> CollectionTypes =
+            new HashSet<Type>(new[]
+            {
+                typeof(Collection<>),
+                typeof(ICollection<>),
+                typeof(ReadOnlyCollection<>),
+                typeof(IReadOnlyCollection<>),
+                typeof(List<>),
+                typeof(IList<>),
+                typeof(IReadOnlyList<>)
+            });
 
-        private static readonly Type[] OrderedCollectionTypes =
-        {
-            typeof(Collection<>),
-            typeof(ReadOnlyCollection<>),
-            typeof(List<>),
-            typeof(IList<>),
-            typeof(IReadOnlyList<>)
-        };
+        private static readonly HashSet<Type> OrderedCollectionTypes =
+            new HashSet<Type>(new[]
+            {
+                typeof(Collection<>),
+                typeof(ReadOnlyCollection<>),
+                typeof(List<>),
+                typeof(IList<>),
+                typeof(IReadOnlyList<>)
+            });
 
-        private static readonly Type[] DictionaryTypes =
-        {
-            typeof(Dictionary<,>),
-            typeof(IDictionary<,>),
-            typeof(ReadOnlyDictionary<,>),
-            typeof(IReadOnlyDictionary<,>),
-            typeof(ConcurrentDictionary<,>),
-        };
+        private static readonly HashSet<Type> DictionaryTypes =
+            new HashSet<Type>(new[]
+            {
+                typeof(Dictionary<,>),
+                typeof(IDictionary<,>),
+                typeof(ReadOnlyDictionary<,>),
+                typeof(IReadOnlyDictionary<,>),
+                typeof(ConcurrentDictionary<,>),
+            });
 
         private static readonly Regex GenericBracketsRegex = new Regex("<.*>", RegexOptions.Compiled);
 
@@ -86,6 +90,74 @@ namespace OBeautifulCode.Type.Recipes
             { typeof(string), "string" },
             { typeof(void), "void" },
         };
+
+        private static readonly Type ObjectType = typeof(object);
+
+        private static readonly Type EnumerableType = typeof(IEnumerable);
+
+        private static readonly Type DictionaryType = typeof(IDictionary);
+
+        private static readonly Type UnboundGenericEnumerableType = typeof(IEnumerable<>);
+
+        private static readonly Type UnboundGenericDictionaryType = typeof(IDictionary<,>);
+
+        private static readonly Type UnboundGenericReadOnlyDictionaryType = typeof(IReadOnlyDictionary<,>);
+
+        /// <summary>
+        /// Gets the type of the elements of a specified enumerable type.
+        /// </summary>
+        /// <param name="type">The enumerable type.</param>
+        /// <returns>
+        /// The type of the elements of the specified enumerable type.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="type"/> is not assignable to <see cref="EnumerableType"/>.</exception>
+        public static Type GetEnumerableElementType(
+            this Type type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            if (!type.IsAssignableTo(EnumerableType))
+            {
+                throw new ArgumentException(Invariant($"Specified type is not assignable to IEnumerable: {type.Name}."));
+            }
+
+            var result = type.GetEnumerableElementTypeInternal();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the type of the values of a specified dictionary type.
+        /// </summary>
+        /// <param name="type">The dictionary type.</param>
+        /// <returns>
+        /// The type of the values of the specified dictionary type.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="type"/> cannot be assigned to <see cref="UnboundGenericReadOnlyDictionaryType"/>, <see cref="UnboundGenericDictionaryType"/>, or <see cref="DictionaryType"/>.</exception>
+        public static Type GetDictionaryValueType(
+            this Type type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            if ((!type.IsAssignableTo(UnboundGenericReadOnlyDictionaryType, treatUnboundGenericAsAssignableTo: true)) &&
+                (!type.IsAssignableTo(UnboundGenericDictionaryType, treatUnboundGenericAsAssignableTo: true)) &&
+                (!type.IsAssignableTo(DictionaryType, treatUnboundGenericAsAssignableTo: true)))
+            {
+                throw new ArgumentException(Invariant($"Specified type is cannot be assigned to either IReadOnlyDictionary<T,K>, IDictionary<T,K>, or IDictionary: {type.Name}."));
+            }
+
+            var result = type.GetDictionaryValueTypeInternal();
+
+            return result;
+        }
 
         /// <summary>
         /// Determines if a type is an anonymous type.
@@ -279,7 +351,8 @@ namespace OBeautifulCode.Type.Recipes
 
             var genericType = type.GetGenericTypeDefinition();
 
-            var result = CollectionTypes.Any(_ => genericType == _);
+            var result = CollectionTypes.Contains(genericType);
+
             return result;
         }
 
@@ -306,7 +379,7 @@ namespace OBeautifulCode.Type.Recipes
 
             var genericType = type.GetGenericTypeDefinition();
 
-            var result = DictionaryTypes.Any(_ => genericType == _);
+            var result = DictionaryTypes.Contains(genericType);
 
             return result;
         }
@@ -320,7 +393,7 @@ namespace OBeautifulCode.Type.Recipes
         /// true if the specified type is a <see cref="System"/> ordered <see cref="IEnumerable{T}"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
-        public static bool IsSystemOrderedEnumerableType(
+        public static bool IsSystemOrderedCollectionType(
             this Type type)
         {
             if (type == null)
@@ -340,7 +413,7 @@ namespace OBeautifulCode.Type.Recipes
 
             var genericType = type.GetGenericTypeDefinition();
 
-            var result = OrderedCollectionTypes.Any(_ => genericType == _);
+            var result = OrderedCollectionTypes.Contains(genericType);
 
             return result;
         }
@@ -478,6 +551,79 @@ namespace OBeautifulCode.Type.Recipes
             if (includeAssemblyDetails && assemblyDetailsTypes.Any())
             {
                 result = result + " || " + string.Join(" | ", assemblyDetailsTypes.Select(_ => _.ToAssemblyDetails()).ToArray());
+            }
+
+            return result;
+        }
+
+        private static Type GetEnumerableElementTypeInternal(
+            this Type type)
+        {
+            Type result;
+            if (type.IsArray)
+            {
+                // type is array, shortcut
+                result = type.GetElementType();
+            }
+            else if (type.IsGenericType && (type.GetGenericTypeDefinition() == UnboundGenericEnumerableType))
+            {
+                // type is IEnumerable<T>
+                result = type.GetGenericArguments()[0];
+            }
+            else
+            {
+                // type implements IEnumerable<T> or is a subclass (sub-sub-class, ...)
+                // of a type that implements IEnumerable<T>
+                // note that we are grabbing the first implementation.  it is possible, but
+                // highly unlikely, for a type to have multiple implementations of IEnumerable<T>
+                result = type
+                    .GetInterfaces()
+                    .Where(_ => _.IsGenericType && (_.GetGenericTypeDefinition() == UnboundGenericEnumerableType))
+                    .Select(_ => _.GenericTypeArguments[0])
+                    .FirstOrDefault();
+
+                if (result == null)
+                {
+                    var baseType = type.BaseType;
+                    result = baseType == null ? ObjectType : GetEnumerableElementTypeInternal(baseType);
+                }
+            }
+
+            return result;
+        }
+
+        private static Type GetDictionaryValueTypeInternal(
+            this Type type)
+        {
+            Type result;
+
+            if (type.IsGenericType && (type.GetGenericTypeDefinition() == UnboundGenericDictionaryType))
+            {
+                // type is IDictionary<T,K>
+                result = type.GetGenericArguments()[1];
+            }
+            else if (type.IsGenericType && (type.GetGenericTypeDefinition() == UnboundGenericReadOnlyDictionaryType))
+            {
+                // type is IReadOnlyDictionary<T,K>
+                result = type.GetGenericArguments()[1];
+            }
+            else
+            {
+                // type implements IDictionary<T,K>/IReadOnlyDictionary<T,K> or is a subclass (sub-sub-class, ...)
+                // of a type that implements those types
+                // note that we are grabbing the first implementation.  it is possible, but
+                // highly unlikely, for a type to have multiple implementations of IDictionary<T,K>
+                result = type
+                    .GetInterfaces()
+                    .Where(_ => _.IsGenericType && ((_.GetGenericTypeDefinition() == UnboundGenericDictionaryType) || (_.GetGenericTypeDefinition() == UnboundGenericReadOnlyDictionaryType)))
+                    .Select(_ => _.GenericTypeArguments[1])
+                    .FirstOrDefault();
+
+                if (result == null)
+                {
+                    var baseType = type.BaseType;
+                    result = baseType == null ? ObjectType : GetDictionaryValueTypeInternal(baseType);
+                }
             }
 
             return result;

@@ -16,13 +16,14 @@ namespace OBeautifulCode.Enum.Recipes
     using System.Linq;
     using System.Reflection;
 
+    using OBeautifulCode.Collection.Recipes;
     using OBeautifulCode.Validation.Recipes;
 
     /// <summary>
     /// Adds some convenient extension methods to enums.
     /// </summary>
 #if !OBeautifulCodeEnumRecipesProject
-    [ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Enum", "See package version number")]
     internal
 #else
@@ -36,11 +37,11 @@ namespace OBeautifulCode.Enum.Recipes
         /// <typeparam name="TEnum">The type of enum.</typeparam>
         /// <returns>
         /// The members/values of the specified enum.
-        /// For flags enums, returns all individual and combined flags.
+        /// For flags enums, returns all individual flags and all combined flags that are defined in the enum.
         /// </returns>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not of type <see cref="Enum"/>.</exception>
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        public static IReadOnlyCollection<TEnum> GetEnumValues<TEnum>()
+        public static IReadOnlyCollection<TEnum> GetDefinedEnumValues<TEnum>()
             where TEnum : struct
         {
             typeof(TEnum).IsEnum.Named($"typeof({nameof(TEnum)}).{nameof(Type.IsEnum)}").Must().BeTrue();
@@ -55,12 +56,12 @@ namespace OBeautifulCode.Enum.Recipes
         /// <param name="enumType">The enum type.</param>
         /// <returns>
         /// The members/values of the specified enum.
-        /// For flags enums, returns all individual and combined flags.
+        /// For flags enums, returns all individual flags and all combined flags that are defined in the enum.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="enumType"/> is not of type <see cref="Enum"/>.</exception>
         [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        public static IReadOnlyCollection<Enum> GetEnumValues(
+        public static IReadOnlyCollection<Enum> GetDefinedEnumValues(
             this Type enumType)
         {
             new { enumType }.Must().NotBeNull();
@@ -112,6 +113,60 @@ namespace OBeautifulCode.Enum.Recipes
         }
 
         /// <summary>
+        /// Gets all possible enum values.
+        /// For a flags enum, this means all possible combination of flags,
+        /// regardless of whether the combination is defined in the enum itself.
+        /// </summary>
+        /// <typeparam name="TEnum">The type of enum.</typeparam>
+        /// <returns>
+        /// All possible enum values.
+        /// </returns>
+        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not of type <see cref="Enum"/>.</exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
+        public static IReadOnlyCollection<TEnum> GetAllPossibleEnumValues<TEnum>()
+            where TEnum : struct
+        {
+            var enumType = typeof(TEnum);
+
+            enumType.IsEnum.Named($"typeof({nameof(TEnum)}).{nameof(Type.IsEnum)}").Must().BeTrue();
+
+            var result = GetAllPossibleEnumValues(enumType).Cast<TEnum>().ToList();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets all possible enum values.
+        /// For a flags enum, this means all possible combination of flags,
+        /// regardless of whether the combination is defined in the enum itself.
+        /// </summary>
+        /// <param name="enumType">The enum type.</param>
+        /// <returns>
+        /// All possible enum values.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not of type <see cref="Enum"/>.</exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
+        public static IReadOnlyCollection<Enum> GetAllPossibleEnumValues(
+            this Type enumType)
+        {
+            new { enumType }.Must().NotBeNull();
+            enumType.IsEnum.Named($"{nameof(enumType)}.{nameof(Type.IsEnum)}").Must().BeTrue();
+
+            IReadOnlyCollection<Enum> result;
+            if (enumType.IsFlagsEnum())
+            {
+                result = enumType.GetIndividualFlagsInternal().GetCombinations().Select(_ => _.Aggregate((x, y) => x.BitwiseOr(y))).Distinct().ToList();
+            }
+            else
+            {
+                result = enumType.GetDefinedEnumValues();
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Gets the flags of a flags enum, with a preference for returning combined flags
         /// instead of individual flags where the enum value uses combined flags.
         /// </summary>
@@ -133,7 +188,7 @@ namespace OBeautifulCode.Enum.Recipes
         {
             new { value }.Must().NotBeNull();
 
-            var result = GetFlags(value, GetEnumValues(value.GetType()).ToArray()).ToList();
+            var result = GetFlags(value, GetDefinedEnumValues(value.GetType()).ToArray()).ToList();
             return result;
         }
 
@@ -164,7 +219,7 @@ namespace OBeautifulCode.Enum.Recipes
             new { value }.Must().NotBeNull();
             typeof(TEnum).IsEnum.Named($"typeof({nameof(TEnum)}).{nameof(Type.IsEnum)}").Must().BeTrue();
 
-            var result = GetFlags(value, GetEnumValues(value.GetType()).ToArray()).Cast<TEnum>().ToList();
+            var result = GetFlags(value, GetDefinedEnumValues(value.GetType()).ToArray()).Cast<TEnum>().ToList();
             return result;
         }
 
@@ -202,16 +257,9 @@ namespace OBeautifulCode.Enum.Recipes
         public static IReadOnlyCollection<Enum> GetIndividualFlags(
             this Type enumType)
         {
-            var values = GetEnumValues(enumType);
-
-            var result = new List<Enum>();
-            foreach (var value in values)
-            {
-                if (value.GetIndividualFlags().Count == 1)
-                {
-                    result.Add(value);
-                }
-            }
+            var result = enumType.IsFlagsEnum() ?
+                enumType.GetIndividualFlagsInternal().ToList() :
+                enumType.GetDefinedEnumValues();
 
             return result;
         }
@@ -233,6 +281,7 @@ namespace OBeautifulCode.Enum.Recipes
             typeof(TEnum).IsEnum.Named($"typeof({nameof(TEnum)}).{nameof(Type.IsEnum)}").Must().BeTrue();
 
             var result = typeof(TEnum).GetIndividualFlags().Cast<TEnum>().ToList();
+
             return result;
         }
 
@@ -259,7 +308,7 @@ namespace OBeautifulCode.Enum.Recipes
             var enumType = value.GetType();
             if (enumType.IsFlagsEnum())
             {
-                result = GetFlags(value, GetFlagValues(value.GetType()).ToArray()).ToList();
+                result = GetFlags(value, value.GetType().GetIndividualFlagsInternal().ToArray()).ToList();
             }
             else
             {
@@ -297,7 +346,7 @@ namespace OBeautifulCode.Enum.Recipes
             var enumType = value.GetType();
             if (enumType.IsFlagsEnum())
             {
-                result = GetFlags(value, GetFlagValues(value.GetType()).ToArray()).Cast<TEnum>().ToList();
+                result = GetFlags(value, value.GetType().GetIndividualFlagsInternal().ToArray()).Cast<TEnum>().ToList();
             }
             else
             {
@@ -320,7 +369,7 @@ namespace OBeautifulCode.Enum.Recipes
         /// <exception cref="ArgumentException"><paramref name="value1"/> is not a flags enum.</exception>
         /// <exception cref="ArgumentException"><paramref name="value1"/> Type != <paramref name="value2"/> Type.</exception>
         public static Enum BitwiseOr(
-            this Enum value1, 
+            this Enum value1,
             Enum value2)
         {
             new { value1 }.Must().NotBeNull();
@@ -331,7 +380,7 @@ namespace OBeautifulCode.Enum.Recipes
 
             value1Type.IsFlagsEnum().Named($"{nameof(value1)}.{nameof(GetType)}().{nameof(IsFlagsEnum)}()").Must().BeTrue();
             (value1Type == value2Type).Named($"{nameof(value1)}.{nameof(GetType)}() == {nameof(value2)}.{nameof(GetType)}()").Must().BeTrue();
-            
+
             Enum result;
             if (Enum.GetUnderlyingType(value1Type) != typeof(ulong))
             {
@@ -385,9 +434,10 @@ namespace OBeautifulCode.Enum.Recipes
             return Enumerable.Empty<Enum>();
         }
 
-        private static IEnumerable<Enum> GetFlagValues(
-            Type enumType)
+        private static IEnumerable<Enum> GetIndividualFlagsInternal(
+            this Type enumType)
         {
+            // this method will NOT work for a regular enums, has to be a flags enum
             ulong flag = 0x1;
             foreach (var value in Enum.GetValues(enumType).Cast<Enum>())
             {

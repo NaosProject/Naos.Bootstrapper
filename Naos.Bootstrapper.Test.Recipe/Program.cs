@@ -75,7 +75,7 @@ namespace Naos.Bootstrapper.Test
 
             var testAssembly = typeof(Program).Assembly;
 
-            var types = testAssembly.GetTypes().Where(_ => !TypeHelper.IsAnonymous(_)).ToList();
+            var types = testAssembly.GetTypes().Where(_ => !_.IsAnonymous()).ToList();
             var typeCandidates = types.Where(_ => _?.FullName?.Contains(typeName) ?? false);
 
             typeCandidates.Named(nameof(typeCandidates)).Must().NotBeEmptyEnumerable();
