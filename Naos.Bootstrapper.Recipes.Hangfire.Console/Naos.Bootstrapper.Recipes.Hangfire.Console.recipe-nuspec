@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Naos.Bootstrapper.Recipes.Hangfire.Console</id>
+    <description>Bootstrapper for the 'Hangfire.Console' project kind.</description>
+    <tags>Bootstrapper</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework="net462" />
+    </frameworkAssemblies>
+    <dependencies>
+      <dependency id="Naos.Bootstrapper.Recipes.Core.Console" version="$version$" />
+      <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
+      <dependency id="EntityFramework" version="[6.1.3]" />
+      <dependency id="Hangfire.Core" version="[1.5.9]" />
+      <dependency id="Hangfire.SqlServer" version="[1.5.9]" />
+      <dependency id="Its.Domain" version="[0.15.28]" />
+      <dependency id="Its.Domain.Sql" version="[0.15.28]" />
+      <dependency id="Its.Validation" version="[1.4.4]" />
+      <dependency id="Naos.Cron" version="1.0.19" />
+      <dependency id="Naos.Cron.Serialization.Json" version="1.0.19" />
+      <dependency id="Naos.MessageBus.Core" version="1.3.26" />
+      <dependency id="Naos.MessageBus.Domain" version="1.3.26" />
+      <dependency id="Naos.MessageBus.Hangfire.Bootstrapper" version="1.3.26" />
+      <dependency id="Naos.MessageBus.Hangfire.Sender" version="1.3.26" />
+      <dependency id="Naos.MessageBus.Persistence" version="1.3.26" />
+      <dependency id="OBeautifulCode.Enum.Recipes.EnumExtensions" version="1.0.20" />
+      <dependency id="OBeautifulCode.Reflection.Recipes.ReflectionHelper" version="1.0.77" />
+      <dependency id="Owin" version="[1.0]" />
+      <dependency id="Rx-Core" version="[2.2.5]" />
+      <dependency id="Rx-Interfaces" version="[2.2.5]" />
+      <dependency id="Rx-Linq" version="[2.2.5]" />
+      <dependency id="Rx-Main" version="[2.2.5]" />
+      <dependency id="Rx-PlatformServices" version="[2.2.5]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="NugetPackageBlacklist.txt" target="NugetPackageBlacklist.txt" />
+    <file src="ConsoleAbstraction.cs.pp" target="content\net462\ConsoleAbstraction.cs.pp" />
+  </files>
+</package>

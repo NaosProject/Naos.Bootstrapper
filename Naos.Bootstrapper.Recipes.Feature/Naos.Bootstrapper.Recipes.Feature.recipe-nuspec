@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Naos.Bootstrapper.Recipes.Feature</id>
+    <description>Bootstrapper for the 'Feature' project kind.</description>
+    <tags>Bootstrapper</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
+    </frameworkAssemblies>
+    <dependencies>
+      <dependency id="Naos.Bootstrapper.Recipes.Core.Assembly" version="$version$" />
+      <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="NugetPackageBlacklist.txt" target="NugetPackageBlacklist.txt" />
+  </files>
+</package>

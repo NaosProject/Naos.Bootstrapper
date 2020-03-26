@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Naos.Bootstrapper.Recipes.Spritely.Api</id>
+    <description>Bootstrapper for the 'Spritely.Api' project kind.</description>
+    <tags>Bootstrapper</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Data" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.IdentityModel" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Net.Http" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Web" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Web.Extensions" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework="net462" />
+    </frameworkAssemblies>
+    <dependencies>
+      <dependency id="Naos.Bootstrapper.Recipes.Core.Console" version="$version$" />
+      <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
+      <dependency id="jose-jwt" version="[2.1.0]" />
+      <dependency id="Microsoft.AspNet.Cors" version="[5.2.3]" />
+      <dependency id="Microsoft.AspNet.WebApi.Client" version="[5.2.3]" />
+      <dependency id="Microsoft.AspNet.WebApi.Core" version="[5.2.3]" />
+      <dependency id="Microsoft.AspNet.WebApi.Cors" version="[5.2.3]" />
+      <dependency id="Microsoft.AspNet.WebApi.Owin" version="[5.2.3]" />
+      <dependency id="Microsoft.AspNet.WebApi.OwinSelfHost" version="[5.2.3]" />
+      <dependency id="Microsoft.Owin" version="[3.0.1]" />
+      <dependency id="Microsoft.Owin.Cors" version="[3.0.1]" />
+      <dependency id="Microsoft.Owin.Host.HttpListener" version="[3.0.1]" />
+      <dependency id="Microsoft.Owin.Host.SystemWeb" version="[3.0.1]" />
+      <dependency id="Microsoft.Owin.Hosting" version="[3.0.1]" />
+      <dependency id="Microsoft.Owin.Security" version="[3.0.1]" />
+      <dependency id="Microsoft.Owin.Security.Jwt" version="[3.0.1]" />
+      <dependency id="Microsoft.Owin.Security.OAuth" version="[3.0.1]" />
+      <dependency id="Owin" version="[1.0]" />
+      <dependency id="SimpleInjector" version="[3.3.2]" />
+      <dependency id="SimpleInjector.Extensions.ExecutionContextScoping" version="[3.3.2]" />
+      <dependency id="SimpleInjector.Integration.WebApi" version="[3.3.2]" />
+      <dependency id="System.IdentityModel.Tokens.Jwt" version="[4.0.2.206221351]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="NugetPackageBlacklist.txt" target="NugetPackageBlacklist.txt" />
+    <file src="SpritelyHarness\**\*.*" target="content\net462\.recipes\Naos.Bootstrapper\SpritelyHarness" />
+    <file src="ConsoleAbstraction.cs.pp" target="content\net462\ConsoleAbstraction.cs.pp" />
+  </files>
+</package>

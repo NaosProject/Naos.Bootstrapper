@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Naos.Bootstrapper.Recipes.DeploymentConfigOnly</id>
+    <description>Bootstrapper for the 'DeploymentConfigOnly' project kind.</description>
+    <tags>Bootstrapper</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
+    </frameworkAssemblies>
+    <dependencies>
+      <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="NugetPackageBlacklist.txt" target="NugetPackageBlacklist.txt" />
+  </files>
+</package>

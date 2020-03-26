@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Naos.Bootstrapper.Recipes.Domain</id>
+    <description>Bootstrapper for the 'Domain' project kind.</description>
+    <tags>Bootstrapper</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
+    </frameworkAssemblies>
+    <dependencies>
+      <dependency id="Naos.Bootstrapper.Recipes.Core.Assembly" version="$version$" />
+      <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
+      <dependency id="OBeautifulCode.Type" version="1.0.45" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="NugetPackageBlacklist.txt" target="NugetPackageBlacklist.txt" />
+  </files>
+</package>

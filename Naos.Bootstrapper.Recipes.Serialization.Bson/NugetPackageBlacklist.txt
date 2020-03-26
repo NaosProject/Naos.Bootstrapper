@@ -1,0 +1,2 @@
+﻿# things that do NOT belong in 'Serialization.Bson' projects
+Newtonsoft.Json

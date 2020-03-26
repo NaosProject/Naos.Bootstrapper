@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Naos.Bootstrapper.Recipes.Serialization.Json</id>
+    <description>Bootstrapper for the 'Serialization.Json' project kind.</description>
+    <tags>Bootstrapper</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
+    </frameworkAssemblies>
+    <dependencies>
+      <dependency id="Naos.Bootstrapper.Recipes.Core.Assembly" version="$version$" />
+      <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
+      <dependency id="Newtonsoft.Json" version="[9.0.1]" />
+      <dependency id="OBeautifulCode.Compression" version="1.0.12" />
+      <dependency id="OBeautifulCode.Representation.System" version="1.0.37" />
+      <dependency id="OBeautifulCode.Serialization" version="1.0.16" />
+      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.16" />
+      <dependency id="OBeautifulCode.Type" version="1.0.45" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="NugetPackageBlacklist.txt" target="NugetPackageBlacklist.txt" />
+  </files>
+</package>

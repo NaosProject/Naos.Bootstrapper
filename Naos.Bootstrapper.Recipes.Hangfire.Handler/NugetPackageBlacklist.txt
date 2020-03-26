@@ -1,0 +1,3 @@
+﻿# This is for MessageBus Handler Packages which cannot reference 'Core.Assembly' because they need access to Naos.Configuration.Domain...
+Naos.Logging.Persistence
+Its.Log

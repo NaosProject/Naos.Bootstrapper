@@ -1,0 +1,1 @@
+﻿# Extensibility point for anything specifically denied from a 'General.Assembly' project; simply enter newline delimited package Id(s); comments are prefixed with '#'; newlines are ignored.

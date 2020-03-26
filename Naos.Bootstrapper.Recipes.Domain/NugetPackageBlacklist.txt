@@ -1,0 +1,6 @@
+﻿# things that do NOT belong in 'Domain' projects
+
+Naos.Logging.Domain
+Newtonsoft.Json
+MongoDB.Bson
+Its.Domain

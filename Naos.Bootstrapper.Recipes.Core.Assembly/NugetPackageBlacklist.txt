@@ -1,0 +1,5 @@
+﻿# things that do NOT belong in shared 'Assembly' producing projects
+
+Naos.Configuration.Domain
+Naos.Logging.Persistence
+Its.Log
