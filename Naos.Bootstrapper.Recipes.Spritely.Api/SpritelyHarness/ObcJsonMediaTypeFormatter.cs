@@ -26,21 +26,17 @@ namespace Naos.Bootstrapper
         /// Initializes a new instance of the <see cref="ObcJsonMediaTypeFormatter"/> class.
         /// </summary>
         /// <param name="jsonConfigurationType">Type of the json configuration.</param>
-        /// <param name="unregisteredTypeEncounteredStrategy">The unregistered type encountered strategy.</param>
-        /// <param name="jsonFormattingKind">Kind of the json formatting.</param>
         public ObcJsonMediaTypeFormatter(
-            Type                                jsonConfigurationType,
-            UnregisteredTypeEncounteredStrategy unregisteredTypeEncounteredStrategy,
-            JsonFormattingKind                  jsonFormattingKind)
+            JsonSerializationConfigurationType jsonConfigurationType)
         {
-            this.Serializer = new ObcJsonSerializer(jsonConfigurationType, unregisteredTypeEncounteredStrategy, jsonFormattingKind);
+            this.Serializer = new ObcJsonSerializer(jsonConfigurationType);
         }
 
         /// <summary>
         /// Gets the serializer.
         /// </summary>
         /// <value>The serializer.</value>
-        public ISerializeAndDeserialize Serializer { get; private set; }
+        public ISerializer Serializer { get; private set; }
 
         /// <inheritdoc />
         public override bool CanReadType(

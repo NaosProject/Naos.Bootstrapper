@@ -20,6 +20,7 @@ namespace $rootnamespace$
     using Naos.Cron;
     using Naos.MessageBus.Domain;
     using Naos.MessageBus.Hangfire.Bootstrapper;
+    using OBeautifulCode.Representation.System;
     using OBeautifulCode.Serialization;
     using OBeautifulCode.Serialization.Json;
 
@@ -30,7 +31,7 @@ namespace $rootnamespace$
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Hangfire", Justification = "Spelling/name is correct.")]
     public partial class ConsoleAbstraction : ConsoleAbstractionBase
     {
-        private static readonly ISerializeAndDeserialize Serializer = new ObcJsonSerializer(typeof(MessageBusJsonConfiguration));
+        private static readonly ISerializer Serializer = new ObcJsonSerializer(typeof(MessageBusJsonSerializationConfiguration).ToJsonSerializationConfigurationType());
 
         /// <summary>
         /// Monitor for items in Hangfire.
@@ -55,8 +56,8 @@ namespace $rootnamespace$
             /*---------------------------------------------------------------------------*
              * Necessary configuration.                                                *
              *---------------------------------------------------------------------------*/
-            var messageBusConnectionConfiguration = Config.Get<MessageBusConnectionConfiguration>(typeof(MessageBusJsonConfiguration));
-            var messageBusLaunchConfig = Config.Get<MessageBusLaunchConfiguration>(typeof(MessageBusJsonConfiguration));
+            var messageBusConnectionConfiguration = Config.Get<MessageBusConnectionConfiguration>(new SerializerRepresentation(SerializationKind.Json, typeof(MessageBusJsonSerializationConfiguration).ToRepresentation()));
+            var messageBusLaunchConfig = Config.Get<MessageBusLaunchConfiguration>(new SerializerRepresentation(SerializationKind.Json, typeof(MessageBusJsonSerializationConfiguration).ToRepresentation()));
 
             /*---------------------------------------------------------------------------*
              * Launch the harness here, it will run until the TimeToLive has expired AND *
@@ -93,13 +94,12 @@ namespace $rootnamespace$
              *---------------------------------------------------------------------------*/
             var parcel = (Parcel)Serializer.Deserialize(parcelJson, typeof(Parcel));
             var schedule = string.IsNullOrWhiteSpace(scheduleJson) ? null : (ScheduleBase)Serializer.Deserialize(scheduleJson, typeof(ScheduleBase));
-            var messageBusConnectionConfiguration = Config.Get<MessageBusConnectionConfiguration>(typeof(MessageBusJsonConfiguration));
-            var messageBusLaunchConfig = Config.Get<MessageBusLaunchConfiguration>(typeof(MessageBusJsonConfiguration));
+            var messageBusConnectionConfiguration = Config.Get<MessageBusConnectionConfiguration>(new SerializerRepresentation(SerializationKind.Json, typeof(MessageBusJsonSerializationConfiguration).ToRepresentation()));
 
             /*---------------------------------------------------------------------------*
              * Send the parcel here.                                                     *
              *---------------------------------------------------------------------------*/
-            HangfireHarnessManager.Send(messageBusConnectionConfiguration, messageBusLaunchConfig.TypeMatchStrategyForMessageResolution, parcel, schedule);
+            HangfireHarnessManager.Send(messageBusConnectionConfiguration, parcel, schedule);
         }
     }
 }

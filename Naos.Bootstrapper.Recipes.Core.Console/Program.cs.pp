@@ -39,7 +39,10 @@ namespace $rootnamespace$
                 WriteAsciiArt(Console.WriteLine);
 
                 // ConsoleAbstraction must derive from ConsoleAbstractionBase which is provided in the Bootstrapper recipes, it contains the implementation of this method.
-                new ConsoleAbstraction().PerformEntryPointPreChecks();
+                var consoleAbstraction = new ConsoleAbstraction();
+                ConsoleAbstractionBase.UpdateTypeRepresentationsOfExceptionsToOmitStackTraceFrom(consoleAbstraction.ExceptionTypeRepresentationsToOnlyPrintMessage);
+
+                consoleAbstraction.PerformEntryPointPreChecks();
 
                 /*---------------------------------------------------------------------------*
                  * This is just a pass through to the CLAP implementation of the harness,    *

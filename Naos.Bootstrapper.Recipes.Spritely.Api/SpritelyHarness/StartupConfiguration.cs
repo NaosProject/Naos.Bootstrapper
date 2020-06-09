@@ -6,8 +6,6 @@
 
 namespace Naos.Bootstrapper
 {
-    using System;
-    using Naos.Configuration.Domain;
     using OBeautifulCode.Serialization;
     using OBeautifulCode.Serialization.Json;
 
@@ -21,27 +19,19 @@ namespace Naos.Bootstrapper
         /// Initializes a new instance of the <see cref="StartupConfiguration"/> class.
         /// </summary>
         /// <param name="jsonConfigurationType">Type of the json configuration.</param>
-        /// <param name="jsonFormattingKind">Kind of the json formatting.</param>
-        /// <param name="unregisteredTypeEncounteredStrategy">The unregistered type encountered strategy.</param>
         /// <param name="initializeLogPolicy">The initialize log policy.</param>
-        public StartupConfiguration(Type jsonConfigurationType = null, JsonFormattingKind jsonFormattingKind = JsonFormattingKind.Compact, UnregisteredTypeEncounteredStrategy unregisteredTypeEncounteredStrategy = UnregisteredTypeEncounteredStrategy.Attempt, InitializeLogPolicy initializeLogPolicy = null)
+        public StartupConfiguration(JsonSerializationConfigurationType jsonConfigurationType = null, InitializeLogPolicy initializeLogPolicy = null)
         {
             this.InitializeLogPolicy = initializeLogPolicy ?? BasicWebApiLogPolicy.Initialize;
-            this.Serializer = new ObcJsonSerializer(jsonConfigurationType ?? typeof(NullJsonConfiguration), unregisteredTypeEncounteredStrategy, jsonFormattingKind);
-            this.DeserializeConfigurationSettings = (t, s) => this.Serializer.Deserialize(s, t);
+            this.Serializer = new ObcJsonSerializer(
+                jsonConfigurationType ?? typeof(NullJsonSerializationConfiguration).ToJsonSerializationConfigurationType());
         }
 
         /// <summary>
         /// Gets the serializer.
         /// </summary>
         /// <value>The serializer.</value>
-        public ISerializeAndDeserialize Serializer { get; private set; }
-
-        /// <summary>
-        /// Gets a function to deserialize configuration settings.
-        /// </summary>
-        /// <value>The deserialize configuration settings function.</value>
-        public DeserializeSettings DeserializeConfigurationSettings { get; private set; }
+        public ISerializer Serializer { get; private set; }
 
         /// <summary>
         /// Gets a function to initialize the log policy.

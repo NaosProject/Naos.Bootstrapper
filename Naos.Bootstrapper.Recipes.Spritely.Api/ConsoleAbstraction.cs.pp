@@ -63,8 +63,6 @@ namespace $rootnamespace$
              *---------------------------------------------------------------------------*/
             try
             {
-                var configuration = new StartupConfiguration();
-                Config.Deserialize = configuration.DeserializeConfigurationSettings;
                 var hostingSettings = Config.Get<HostingSettings>();
                 var startOptions = new StartOptions(hostingSettings.Urls.First());
                 hostingSettings.Urls.Skip(1).ToList().ForEach(startOptions.Urls.Add);
