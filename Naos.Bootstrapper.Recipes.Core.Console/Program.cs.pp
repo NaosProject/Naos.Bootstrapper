@@ -14,10 +14,9 @@ namespace $rootnamespace$
 #endif
 {
     using System;
-
     using CLAP;
-
     using Its.Log.Instrumentation;
+    using Naos.Bootstrapper;
 
     /// <summary>
     /// Main entry point of application.
