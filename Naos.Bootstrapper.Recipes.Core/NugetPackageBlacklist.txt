@@ -9,6 +9,7 @@ Naos.Recipes.Console.Domain
 Naos.Recipes.FluentUri
 Naos.Recipes.Configuration.Bootstrapper
 Naos.Recipes.Configuration.Setup
+Naos.Recipes.InitializeTestProject
 
 regex:^Spritely.Foundations.
 
