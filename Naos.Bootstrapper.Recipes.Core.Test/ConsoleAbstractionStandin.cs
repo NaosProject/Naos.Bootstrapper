@@ -13,6 +13,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Naos.Bootstrapper
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Compile only, not included in package.
     /// </summary>
@@ -21,9 +23,9 @@ namespace Naos.Bootstrapper
     public abstract class ConsoleAbstractionBaseStandin
     {
         /// <summary>
-        /// Gets or sets the exception type representations to only print message.
+        /// Gets the exception type representations to only print message.
         /// </summary>
         /// <value>The exception type representations to only print message.</value>
-        public static TypeRepresentation[] ExceptionTypeRepresentationsToOnlyPrintMessage { get; set; }
+        public virtual IReadOnlyCollection<TypeRepresentation> ExceptionTypeRepresentationsToOnlyPrintMessage => new TypeRepresentation[0];
     }
 }

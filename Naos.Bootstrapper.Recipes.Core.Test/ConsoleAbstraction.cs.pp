@@ -33,11 +33,8 @@ namespace $rootnamespace$
     ConsoleAbstractionBaseStandin
 #endif
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline", Justification = "Newing the serializer in a field initializer is fine.")]
-        static ConsoleAbstraction()
-        {
-            ExceptionTypeRepresentationsToOnlyPrintMessage = new[] { typeof(TestFailedException).ToRepresentation() };
-        }
+        /// <inheritdoc />
+        public override IReadOnlyCollection<TypeRepresentation> ExceptionTypeRepresentationsToOnlyPrintMessage => new[] { typeof(TestFailedException).ToRepresentation() };
 
         /// <summary>
         /// Runs the tests in the specified type.
