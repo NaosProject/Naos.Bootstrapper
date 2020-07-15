@@ -56,7 +56,7 @@ namespace $rootnamespace$
             /*---------------------------------------------------------------------------*
              * Any method should run this logic to write telemetry info to the log.      *
              *---------------------------------------------------------------------------*/
-            WriteStandardTelemetry();
+            // WriteStandardTelemetry(); // removing this for now because it's not being collected well enough
 
             /*---------------------------------------------------------------------------*
              * Launch the harness here.                                                  *

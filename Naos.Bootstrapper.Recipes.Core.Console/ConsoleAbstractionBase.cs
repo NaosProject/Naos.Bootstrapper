@@ -488,7 +488,7 @@ namespace Naos.Bootstrapper
             /*---------------------------------------------------------------------------*
              * Any method should run this logic to write telemetry info to the log.      *
              *---------------------------------------------------------------------------*/
-            WriteStandardTelemetry();
+            // WriteStandardTelemetry(); // removing this for now because it's not being collected well enough
 
             /*---------------------------------------------------------------------------*
              * This is not necessary but often very useful to print out the arguments.   *
