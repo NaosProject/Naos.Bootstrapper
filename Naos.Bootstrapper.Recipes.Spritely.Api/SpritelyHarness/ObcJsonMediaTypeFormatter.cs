@@ -13,6 +13,7 @@ namespace Naos.Bootstrapper
     using System.Net.Http.Formatting;
     using System.Threading;
     using System.Threading.Tasks;
+
     using OBeautifulCode.Serialization;
     using OBeautifulCode.Serialization.Json;
 
@@ -98,10 +99,9 @@ namespace Naos.Bootstrapper
             TransportContext transportContext)
         {
             var contents = this.Serializer.SerializeToString(value);
-            using (var streamWriter = new StreamWriter(writeStream))
-            {
+            var streamWriter = new StreamWriter(writeStream);
                 await streamWriter.WriteAsync(contents);
-            }
+            await streamWriter.FlushAsync();
         }
 
         /// <inheritdoc />
@@ -114,10 +114,9 @@ namespace Naos.Bootstrapper
             CancellationToken cancellationToken)
         {
             var contents = this.Serializer.SerializeToString(value);
-            using (var streamWriter = new StreamWriter(writeStream))
-            {
+            var streamWriter = new StreamWriter(writeStream);
                 await streamWriter.WriteAsync(contents);
-            }
+            await streamWriter.FlushAsync();
         }
     }
 }
