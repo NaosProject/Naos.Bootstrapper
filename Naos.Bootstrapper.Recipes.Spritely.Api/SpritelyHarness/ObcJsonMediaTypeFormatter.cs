@@ -100,7 +100,7 @@ namespace Naos.Bootstrapper
         {
             var contents = this.Serializer.SerializeToString(value);
             var streamWriter = new StreamWriter(writeStream);
-                await streamWriter.WriteAsync(contents);
+            await streamWriter.WriteAsync(contents);
             await streamWriter.FlushAsync();
         }
 
@@ -115,7 +115,7 @@ namespace Naos.Bootstrapper
         {
             var contents = this.Serializer.SerializeToString(value);
             var streamWriter = new StreamWriter(writeStream);
-                await streamWriter.WriteAsync(contents);
+            await streamWriter.WriteAsync(contents);
             await streamWriter.FlushAsync();
         }
     }
