@@ -12,7 +12,7 @@ namespace OBeautifulCode.Type.Recipes
     using System;
 
     /// <summary>
-    /// Extensions methods on type <see cref="Type"/>.
+    /// Options for generating a readability-optimized string representation of a type.
     /// </summary>
     [Flags]
 #if !OBeautifulCodeTypeRecipesProject
