@@ -11,11 +11,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Naos.Bootstrapper.Recipes.Feature")]
-[assembly: AssemblyDescription("Naos.Bootstrapper.Recipes.Feature")]
+[assembly: AssemblyTitle("Naos.Bootstrapper.Recipes.Protocol")]
+[assembly: AssemblyDescription("Naos.Bootstrapper.Recipes.Protocol")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Naos Project")]
-[assembly: AssemblyProduct("Naos.Bootstrapper.Recipes.Feature")]
+[assembly: AssemblyProduct("Naos.Bootstrapper.Recipes.Protocol")]
 [assembly: AssemblyCopyright("Copyright © Naos Project $year$")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

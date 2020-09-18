@@ -8,8 +8,8 @@
     <ProjectGuid>{152B7384-7075-47AF-BA08-CFDC0377E87C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Naos.Bootstrapper.Recipes.Feature.Test</RootNamespace>
-    <AssemblyName>Naos.Bootstrapper.Recipes.Feature.Test</AssemblyName>
+    <RootNamespace>Naos.Bootstrapper.Recipes.Protocol.Test</RootNamespace>
+    <AssemblyName>Naos.Bootstrapper.Recipes.Protocol.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -25,7 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Debug\Naos.Bootstrapper.Feature.Test.Recipe.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Naos.Bootstrapper.Protocol.Test.Recipe.xml</DocumentationFile>
     <CodeAnalysisRuleSet />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <DocumentationFile>bin\Release\Naos.Bootstrapper.Feature.Test.Recipe.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Naos.Bootstrapper.Protocol.Test.Recipe.xml</DocumentationFile>
     <CodeAnalysisRuleSet />
   </PropertyGroup>
   <ItemGroup>
@@ -189,7 +189,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <AdditionalFiles Include=".analyzers\stylecop.json" />
     <None Include=".analyzers\test.ruleset" />
-    <None Include="Naos.Bootstrapper.Recipes.Feature.Test.recipe-nuspec" />
+    <None Include="Naos.Bootstrapper.Recipes.Protocol.Test.recipe-nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

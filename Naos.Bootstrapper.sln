@@ -19,9 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naos.Bootstrapper.Recipes.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naos.Bootstrapper.Recipes.Domain.Test", "Naos.Bootstrapper.Recipes.Domain.Test\Naos.Bootstrapper.Recipes.Domain.Test.csproj", "{DAB5F079-13C7-41D2-A2DD-AC1D4756CD8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naos.Bootstrapper.Recipes.Feature", "Naos.Bootstrapper.Recipes.Feature\Naos.Bootstrapper.Recipes.Feature.csproj", "{B67DD254-308D-4576-927E-72E475B73D72}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naos.Bootstrapper.Recipes.Protocol", "Naos.Bootstrapper.Recipes.Protocol\Naos.Bootstrapper.Recipes.Protocol.csproj", "{B67DD254-308D-4576-927E-72E475B73D72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naos.Bootstrapper.Recipes.Feature.Test", "Naos.Bootstrapper.Recipes.Feature.Test\Naos.Bootstrapper.Recipes.Feature.Test.csproj", "{152B7384-7075-47AF-BA08-CFDC0377E87C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naos.Bootstrapper.Recipes.Protocol.Test", "Naos.Bootstrapper.Recipes.Protocol.Test\Naos.Bootstrapper.Recipes.Protocol.Test.csproj", "{152B7384-7075-47AF-BA08-CFDC0377E87C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Naos.Bootstrapper.Recipes.Hangfire.Console", "Naos.Bootstrapper.Recipes.Hangfire.Console\Naos.Bootstrapper.Recipes.Hangfire.Console.csproj", "{CE5DAC77-9030-404A-8B76-ED969D9A2A29}"
 EndProject
