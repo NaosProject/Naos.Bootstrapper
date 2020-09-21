@@ -8,7 +8,7 @@ namespace Naos.Bootstrapper
 {
     using System;
     using Microsoft.Owin.Security.OAuth;
-    using Naos.Bootstrapper.Recipes.Spritely.Api.Internal;
+    using Naos.CodeAnalysis.Recipes;
     using Owin;
 
     /// <summary>
