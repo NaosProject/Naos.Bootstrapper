@@ -9,9 +9,9 @@
 
 namespace OBeautifulCode.Serialization.Recipes
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using global::System;
+    using global::System.Collections.Generic;
+    using global::System.Linq;
 
     using OBeautifulCode.Assertion.Recipes;
     using OBeautifulCode.Reflection.Recipes;
@@ -30,8 +30,8 @@ namespace OBeautifulCode.Serialization.Recipes
     /// <param name="serializedPayload">The results of serialization.</param>
     /// <param name="serializationFormat">The serialization format used.</param>
     /// <param name="deserializedObject">The deserialized object.</param>
-#if !OBeautifulCodeSerializationRecipesProject
-    [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Serialization.Recipes", "See package version number")]
+#if !OBeautifulCodeSerializationSolution
+    [global::System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Serialization.Recipes", "See package version number")]
     internal
 #else
     public
@@ -44,9 +44,9 @@ namespace OBeautifulCode.Serialization.Recipes
     /// <summary>
     /// Extension methods for roundtrip serialization testing.
     /// </summary>
-#if !OBeautifulCodeSerializationRecipesProject
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Serialization.Recipes", "See package version number")]
+#if !OBeautifulCodeSerializationSolution
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Serialization.Recipes", "See package version number")]
     internal
 #else
     public

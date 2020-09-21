@@ -9,18 +9,18 @@
 
 namespace OBeautifulCode.Compression.Recipes
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
-    using System.IO.Compression;
+    using global::System;
+    using global::System.Diagnostics.CodeAnalysis;
+    using global::System.IO;
+    using global::System.IO.Compression;
 
-    using OBeautifulCode.Compression.Recipes.Internal;
+    using OBeautifulCode.CodeAnalysis.Recipes;
 
     /// <summary>
     /// Build in dot net implementation of <see cref="ICompressAndDecompress"/>.
     /// Implementation from: <a href="https://stackoverflow.com/questions/40909052/using-gzip-to-compress-decompress-an-array-of-bytes" />.
     /// </summary>
-#if !OBeautifulCodeCompressionRecipesProject
+#if !OBeautifulCodeCompressionSolution
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Compression.Recipes", "See package version number")]
     internal

@@ -9,14 +9,14 @@
 
 namespace OBeautifulCode.Compression.Recipes
 {
-    using System;
+    using global::System;
 
-    using static System.FormattableString;
+    using static global::System.FormattableString;
 
     /// <summary>
     /// Get the correct <see cref="ICompressAndDecompress" /> implementation based on the kind.
     /// </summary>
-#if !OBeautifulCodeCompressionRecipesProject
+#if !OBeautifulCodeCompressionSolution
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Compression.Recipes", "See package version number")]
     internal

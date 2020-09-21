@@ -9,18 +9,19 @@
 
 namespace OBeautifulCode.Type.Recipes
 {
-    using System;
+    using global::System;
 
     /// <summary>
     /// Options for generating a XML doc compatible string representation of a type.
     /// </summary>
     [Flags]
-#if !OBeautifulCodeTypeRecipesProject
+#if !OBeautifulCodeTypeSolution
+    [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Type.Recipes", "See package version number")]
     internal
 #else
     public
 #endif
-        enum ToStringXmlDocOptions
+    enum ToStringXmlDocOptions
     {
         /// <summary>
         /// None (default).

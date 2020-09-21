@@ -9,7 +9,7 @@
 
 namespace OBeautifulCode.Math.Recipes
 {
-    using System;
+    using global::System;
 
     /// <summary>
     /// Represents a thread-safe pseudo-random number generator,
@@ -22,7 +22,7 @@ namespace OBeautifulCode.Math.Recipes
     /// <a href="http://codeblog.jonskeet.uk/2009/11/04/revisiting-randomness/"/>
     /// System.Random is not thread-safe, hence the need for this class.
     /// </remarks>
-#if !OBeautifulCodeMathRecipesProject
+#if !OBeautifulCodeMathSolution
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Math.Recipes", "See package version number")]
     internal

@@ -9,14 +9,14 @@
 
 namespace OBeautifulCode.Reflection.Recipes
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using global::System;
+    using global::System.Collections.Generic;
+    using global::System.Linq;
 
     /// <summary>
     /// Provides useful methods related to reflection.
     /// </summary>
-#if !OBeautifulCodeReflectionRecipesProject
+#if !OBeautifulCodeReflectionSolution
     internal
 #else
     public

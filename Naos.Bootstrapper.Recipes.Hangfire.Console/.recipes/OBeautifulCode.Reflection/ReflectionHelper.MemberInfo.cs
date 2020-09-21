@@ -9,15 +9,15 @@
 
 namespace OBeautifulCode.Reflection.Recipes
 {
-    using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
+    using global::System;
+    using global::System.Linq;
+    using global::System.Reflection;
+    using global::System.Runtime.CompilerServices;
 
     /// <summary>
     /// Provides useful methods related to reflection.
     /// </summary>
-#if !OBeautifulCodeReflectionRecipesProject
+#if !OBeautifulCodeReflectionSolution
     internal
 #else
     public

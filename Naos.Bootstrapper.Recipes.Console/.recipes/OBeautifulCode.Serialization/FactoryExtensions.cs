@@ -9,16 +9,16 @@
 
 namespace OBeautifulCode.Serialization.Recipes
 {
-    using System.Diagnostics.CodeAnalysis;
+    using global::System.Diagnostics.CodeAnalysis;
 
     using OBeautifulCode.Representation.System;
 
     /// <summary>
     /// Extension methods.
     /// </summary>
-#if !OBeautifulCodeSerializationRecipesProject
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-    [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Serialization.Recipes", "See package version number")]
+#if !OBeautifulCodeSerializationSolution
+    [global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [global::System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Serialization.Recipes", "See package version number")]
     internal
 #else
     public

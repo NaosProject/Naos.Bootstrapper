@@ -12,7 +12,7 @@ namespace OBeautifulCode.Compression.Recipes
     /// <summary>
     /// Null implementation of <see cref="ICompressAndDecompress"/>.
     /// </summary>
-#if !OBeautifulCodeCompressionRecipesProject
+#if !OBeautifulCodeCompressionSolution
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Compression.Recipes", "See package version number")]
     internal

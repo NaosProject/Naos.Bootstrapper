@@ -9,22 +9,23 @@
 
 namespace OBeautifulCode.Type.Recipes
 {
-    using OBeautifulCode.Type.Recipes.Internal;
-    using System;
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
-    using System.Collections;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Text.RegularExpressions;
+    using global::System;
+    using global::System.CodeDom;
+    using global::System.CodeDom.Compiler;
+    using global::System.Collections;
+    using global::System.Collections.Concurrent;
+    using global::System.Collections.Generic;
+    using global::System.Collections.ObjectModel;
+    using global::System.Diagnostics.CodeAnalysis;
+    using global::System.Globalization;
+    using global::System.Linq;
+    using global::System.Reflection;
+    using global::System.Runtime.CompilerServices;
+    using global::System.Text.RegularExpressions;
 
-    using static System.FormattableString;
+    using OBeautifulCode.CodeAnalysis.Recipes;
+
+    using static global::System.FormattableString;
 
     /// <summary>
     /// Extension methods on type <see cref="Type"/>.
@@ -40,7 +41,7 @@ namespace OBeautifulCode.Type.Recipes
     /// <a href="https://stackoverflow.com/questions/59144791/if-type-isgenericparameter-true-will-type-containsgenericparameters-true?noredirect=1#comment104515860_59144791" />.
     /// <a href="https://stackoverflow.com/questions/59141721/why-is-the-basetype-of-a-generic-type-definition-not-itself-a-generic-type-defin?noredirect=1#comment104515814_59141721" />.
     /// </remarks>
-#if !OBeautifulCodeTypeRecipesProject
+#if !OBeautifulCodeTypeSolution
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
     [System.CodeDom.Compiler.GeneratedCode("OBeautifulCode.Type.Recipes", "See package version number")]
     internal
