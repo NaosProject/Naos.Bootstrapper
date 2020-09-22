@@ -8,10 +8,10 @@
       <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
     </frameworkAssemblies>
     <dependencies>
-      <dependency id="Naos.Build.Analyzers" version="1.55.31" />
-      <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.15" />
-      <dependency id="OBeautifulCode.Equality.Recipes.EqualityHelpers" version="1.0.20" />
-      <dependency id="OBeautifulCode.Type.Recipes.TypeExtensions" version="1.0.51" />
+      <dependency id="Naos.Build.Analyzers" version="1.55.34" />
+      <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.17" />
+      <dependency id="OBeautifulCode.Equality.Recipes.EqualityHelpers" version="1.0.22" />
+      <dependency id="OBeautifulCode.Type.Recipes.TypeExtensions" version="1.0.69" />
       <dependency id="StyleCop.Analyzers" version="[1.1.118]" />
     </dependencies>
   </metadata>

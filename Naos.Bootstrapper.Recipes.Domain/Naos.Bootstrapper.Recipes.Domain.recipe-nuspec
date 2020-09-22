@@ -10,7 +10,7 @@
     <dependencies>
       <dependency id="Naos.Bootstrapper.Recipes.Core.Assembly" version="$version$" />
       <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
-      <dependency id="OBeautifulCode.Type" version="1.0.51" />
+      <dependency id="OBeautifulCode.Type" version="1.0.69" />
     </dependencies>
   </metadata>
   <files>
