@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>Naos.Bootstrapper.Recipes.Feature.Test</id>
-    <description>Bootstrapper for the 'Feature.Test' project kind.</description>
+    <id>Naos.Bootstrapper.Recipes.Protocol.Test</id>
+    <description>Bootstrapper for the 'Protocol.Test' project kind.</description>
     <tags>Bootstrapper</tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
