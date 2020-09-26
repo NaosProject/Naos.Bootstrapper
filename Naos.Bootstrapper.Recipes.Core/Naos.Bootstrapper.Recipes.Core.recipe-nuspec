@@ -8,7 +8,7 @@
       <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
     </frameworkAssemblies>
     <dependencies>
-      <dependency id="Naos.Build.Analyzers" version="1.55.38" />
+      <dependency id="Naos.Build.Analyzers" version="1.55.39" />
       <dependency id="Naos.CodeAnalysis.Recipes.SuppressBecause" version="1.0.125" />
       <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.17" />
       <dependency id="OBeautifulCode.Collection.Recipes.EnumerableExtensions" version="1.0.46" />
