@@ -16,6 +16,7 @@
       <dependency id="OBeautifulCode.Serialization" version="1.0.74" />
       <dependency id="OBeautifulCode.Serialization.Json" version="1.0.74" />
       <dependency id="OBeautifulCode.Type" version="1.0.69" />
+      <dependency id="Naos.Protocol.Serialization.Json" version="1.0.63" />
     </dependencies>
   </metadata>
   <files>
