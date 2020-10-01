@@ -203,10 +203,17 @@
     <Compile Include=".recipes\OBeautifulCode.Equality\ReadOnlyDictionaryEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Math\ThreadSafeRandom.cs" />
     <Compile Include=".recipes\OBeautifulCode.Process\ProcessHelper.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Reflection\AppDomainHelper.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Reflection\DisposableAppDomain.cs" />
     <Compile Include=".recipes\OBeautifulCode.Reflection\SuppressBecause.cs" />
     <Compile Include=".recipes\OBeautifulCode.Representation\RepresentationSystemDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.Representation\RepresentationSystemDummyFactory.designer.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Serialization\AppDomainScenarios.cs" />
     <Compile Include=".recipes\OBeautifulCode.Serialization\FactoryExtensions.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Serialization\RoundtripSerializationExtensions.Bson.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Serialization\RoundtripSerializationExtensions.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Serialization\RoundtripSerializationExtensions.Json.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Serialization\RoundtripSerializationExtensions.PropertyBag.cs" />
     <Compile Include=".recipes\OBeautifulCode.Serialization\SerializationDummyFactory.cs" />
     <Compile Include=".recipes\OBeautifulCode.Serialization\SerializationDummyFactory.designer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Serialization\SerializerFactory.cs" />

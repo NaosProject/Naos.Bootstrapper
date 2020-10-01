@@ -11,6 +11,8 @@
       <dependency id="Naos.Bootstrapper.Recipes.Core.Assembly" version="$version$" />
       <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
       <dependency id="Naos.Protocol.Domain" version="1.0.63" />
+      <dependency id="OBeautifulCode.Representation.System" version="1.0.53" />
+      <dependency id="OBeautifulCode.Type" version="1.0.69" />
     </dependencies>
   </metadata>
   <files>
