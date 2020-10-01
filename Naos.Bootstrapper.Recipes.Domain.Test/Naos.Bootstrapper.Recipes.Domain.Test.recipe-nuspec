@@ -15,6 +15,8 @@
       <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
       <dependency id="Naos.Protocol.Domain" version="1.0.63" />
       <dependency id="Naos.Protocol.Recipes.DummyFactory" version="1.0.63" />
+      <dependency id="OBeautifulCode.Serialization.Recipes.DummyFactory" version="1.0.74" />
+      <dependency id="OBeautifulCode.CodeGen.ModelObject.Recipes.TestScenarios" version="1.0.106" />
     </dependencies>
   </metadata>
   <files>
