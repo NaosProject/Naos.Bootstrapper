@@ -83,6 +83,7 @@
     <Compile Include=".recipes\OBeautifulCode.Type\TypeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <AdditionalFiles Include=".analyzers\stylecop.json" />
+    <Compile Include="Properties\ProjectInfo.cs" />
     <None Include=".analyzers\release.ruleset" />
     <None Include="Naos.Bootstrapper.Recipes.Core.recipe-nuspec" />
     <None Include="packages.config" />

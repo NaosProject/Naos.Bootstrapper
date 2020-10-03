@@ -9,6 +9,7 @@
     </frameworkAssemblies>
     <dependencies>
       <dependency id="Naos.Build.Analyzers" version="1.55.40" />
+      <dependency id="Naos.Build.Properties.ProjectInfo" version="1.55.41" />
       <dependency id="Naos.CodeAnalysis.Recipes.SuppressBecause" version="1.0.125" />
       <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.17" />
       <dependency id="OBeautifulCode.CodeAnalysis.Recipes.SuppressBecause" version="1.0.6" />
