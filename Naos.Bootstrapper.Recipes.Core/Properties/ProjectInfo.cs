@@ -9,6 +9,8 @@
 
 namespace Naos.Bootstrapper.Recipes.Core
 {
+    using global::System.Reflection;
+    
     /// <summary>
     /// Project-related information.
     /// </summary>
