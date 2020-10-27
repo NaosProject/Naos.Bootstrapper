@@ -12,7 +12,7 @@
       <dependency id="CLAP" version="[4.6]" />
       <dependency id="Its.Log" version="[2.9.14]" />
       <dependency id="MongoDB.Bson" version="[2.4.4]" />
-      <dependency id="Naos.Build.Analyzers" version="1.55.44" />
+      <dependency id="Naos.Build.Analyzers" version="1.55.46" />
       <dependency id="Naos.CodeAnalysis.Recipes.SuppressBecause" version="1.0.126" />
       <dependency id="Naos.Configuration.Domain" version="1.0.18" />
       <dependency id="Naos.Diagnostics.Domain" version="1.3.33" />
@@ -26,21 +26,21 @@
       <dependency id="Naos.Telemetry.Domain" version="1.0.24" />
       <dependency id="Newtonsoft.Json" version="[9.0.1]" />
       <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.17" />
-      <dependency id="OBeautifulCode.CodeAnalysis.Recipes.SuppressBecause" version="1.0.7" />
+      <dependency id="OBeautifulCode.CodeAnalysis.Recipes.SuppressBecause" version="1.0.8" />
       <dependency id="OBeautifulCode.Collection.Recipes.EnumerableExtensions" version="1.0.46" />
       <dependency id="OBeautifulCode.Compression" version="1.0.19" />
       <dependency id="OBeautifulCode.Compression.Recipes.CompressionHelper" version="1.0.19" />
       <dependency id="OBeautifulCode.Equality.Recipes.EqualityHelpers" version="1.0.22" />
       <dependency id="OBeautifulCode.Process.Recipes.ProcessHelper" version="1.0.9" />
       <dependency id="OBeautifulCode.Representation.System" version="1.0.55" />
-      <dependency id="OBeautifulCode.Serialization" version="1.0.77" />
-      <dependency id="OBeautifulCode.Serialization.Bson" version="1.0.77" />
-      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.77" />
-      <dependency id="OBeautifulCode.Serialization.PropertyBag" version="1.0.77" />
-      <dependency id="OBeautifulCode.Serialization.Recipes.Factory" version="1.0.77" />
+      <dependency id="OBeautifulCode.Serialization" version="1.0.84" />
+      <dependency id="OBeautifulCode.Serialization.Bson" version="1.0.84" />
+      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.84" />
+      <dependency id="OBeautifulCode.Serialization.PropertyBag" version="1.0.84" />
+      <dependency id="OBeautifulCode.Serialization.Recipes.Factory" version="1.0.84" />
       <dependency id="OBeautifulCode.String.Recipes.StringExtensions" version="1.0.47" />
-      <dependency id="OBeautifulCode.Type" version="1.0.71" />
-      <dependency id="OBeautifulCode.Type.Recipes.TypeExtensions" version="1.0.71" />
+      <dependency id="OBeautifulCode.Type" version="1.0.73" />
+      <dependency id="OBeautifulCode.Type.Recipes.TypeExtensions" version="1.0.73" />
       <dependency id="StyleCop.Analyzers" version="[1.1.118]" />
     </dependencies>
   </metadata>

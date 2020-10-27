@@ -22,15 +22,15 @@
       <dependency id="OBeautifulCode.AutoFakeItEasy" version="1.0.129" />
       <dependency id="OBeautifulCode.Compression" version="1.0.19" />
       <dependency id="OBeautifulCode.Compression.Recipes.CompressionHelper" version="1.0.19" />
-      <dependency id="OBeautifulCode.Reflection.Recipes.AppDomainHelper" version="1.0.91" />
+      <dependency id="OBeautifulCode.Reflection.Recipes.AppDomainHelper" version="1.0.94" />
       <dependency id="OBeautifulCode.Representation.System" version="1.0.55" />
-      <dependency id="OBeautifulCode.Serialization" version="1.0.77" />
-      <dependency id="OBeautifulCode.Serialization.Bson" version="1.0.77" />
-      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.77" />
-      <dependency id="OBeautifulCode.Serialization.PropertyBag" version="1.0.77" />
-      <dependency id="OBeautifulCode.Serialization.Recipes.Factory" version="1.0.77" />
-      <dependency id="OBeautifulCode.Serialization.Recipes.RoundtripSerializationExtensions" version="1.0.77" />
-      <dependency id="OBeautifulCode.Type" version="1.0.71" />
+      <dependency id="OBeautifulCode.Serialization" version="1.0.84" />
+      <dependency id="OBeautifulCode.Serialization.Bson" version="1.0.84" />
+      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.84" />
+      <dependency id="OBeautifulCode.Serialization.PropertyBag" version="1.0.84" />
+      <dependency id="OBeautifulCode.Serialization.Recipes.Factory" version="1.0.84" />
+      <dependency id="OBeautifulCode.Serialization.Recipes.RoundtripSerializationExtensions" version="1.0.84" />
+      <dependency id="OBeautifulCode.Type" version="1.0.73" />
       <dependency id="xunit" version="[2.4.1]" />
       <dependency id="xunit.abstractions" version="[2.0.3]" />
       <dependency id="xunit.analyzers" version="[0.10.0]" />

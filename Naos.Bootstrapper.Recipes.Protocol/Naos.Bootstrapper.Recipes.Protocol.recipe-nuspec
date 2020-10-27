@@ -10,9 +10,9 @@
     <dependencies>
       <dependency id="Naos.Bootstrapper.Recipes.Core.Assembly" version="$version$" />
       <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
-      <dependency id="Naos.Protocol.Domain" version="1.0.68" />
+      <dependency id="Naos.Protocol.Domain" version="1.0.74" />
       <dependency id="OBeautifulCode.Representation.System" version="1.0.55" />
-      <dependency id="OBeautifulCode.Type" version="1.0.71" />
+      <dependency id="OBeautifulCode.Type" version="1.0.73" />
     </dependencies>
   </metadata>
   <files>
