@@ -11,14 +11,15 @@ namespace OBeautifulCode.Reflection.Recipes
 {
     using global::System;
     using global::System.Collections.Generic;
+    using global::System.Diagnostics.CodeAnalysis;
     using global::System.Linq;
     using global::System.Reflection;
 
+    using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.Type.Recipes;
 
-    /// <summary>
-    /// Provides useful methods related to reflection.
-    /// </summary>
+    using static global::System.FormattableString;
+
 #if !OBeautifulCodeReflectionSolution
     internal
 #else
@@ -27,34 +28,65 @@ namespace OBeautifulCode.Reflection.Recipes
     static partial class ReflectionHelper
     {
         /// <summary>
-        /// Determines if an object has a given property.
+        /// Determines if a type has a property of the specified property name.
         /// </summary>
-        /// <param name="item">Object for which to check for the given property.</param>
+        /// <param name="type">The type to check.</param>
         /// <param name="propertyName">The name of the property to check for.</param>
-        /// <param name="bindingFlags">Optional binding flags to use during reflection operations.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
         /// <returns>
-        /// true if the object has the specified property, false if not.
+        /// true if the type has a property of the specified property name, false if not.
         /// </returns>
-        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
         public static bool HasProperty(
-            this object item,
+            this Type type,
             string propertyName,
-            BindingFlags bindingFlags = DefaultBindingFlags) =>
-            GetPropertyInfo(item?.GetType(), propertyName, bindingFlags) != null;
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            if (propertyName == null)
+            {
+                throw new ArgumentNullException(nameof(propertyName));
+            }
+
+            if (string.IsNullOrWhiteSpace(propertyName))
+            {
+                throw new ArgumentException(Invariant($"{nameof(propertyName)} is white space."));
+            }
+
+            bool result;
+
+            try
+            {
+                result = type.GetProperty(propertyName, bindingFlags) != null;
+            }
+            catch (AmbiguousMatchException)
+            {
+                result = true;
+            }
+
+            return result;
+        }
 
         /// <summary>
-        /// Gets the names of all properties.
+        /// Gets the name of all of the properties.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <param name="bindingFlags">The binding flags to use.</param>
-        /// <returns>Collection of property names.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
+        /// <returns>
+        /// The property names.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
         public static IReadOnlyCollection<string> GetPropertyNames(
             this Type type,
-            BindingFlags bindingFlags = DefaultBindingFlags)
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
         {
             if (type == null)
             {
@@ -69,222 +101,24 @@ namespace OBeautifulCode.Reflection.Recipes
         }
 
         /// <summary>
-        /// Retrieves a property value from a given object.
+        /// Gets the <see cref="PropertyInfo"/> for the specified property.
         /// </summary>
-        /// <typeparam name="T">Type of the property.</typeparam>
-        /// <param name="type">Type to get property value on (will only get static properties).</param>
+        /// <param name="type">The type.</param>
         /// <param name="propertyName">The name of the property.</param>
-        /// <param name="bindingFlags">Optional binding flags to use during reflection operations.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
         /// <returns>
-        /// The value of the property.
+        /// The <see cref="PropertyInfo"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
-        /// <exception cref="InvalidOperationException">The property was not found.</exception>
-        /// <exception cref="InvalidCastException">The property is not of the specified type.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
-        public static T GetPropertyValue<T>(
+        /// <exception cref="ArgumentException">There is no property named <paramref name="propertyName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one property named <paramref name="propertyName"/> on the object type using the specified binding constraints.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static PropertyInfo GetPropertyInfo(
             this Type type,
             string propertyName,
-            BindingFlags bindingFlags = DefaultBindingFlags)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            var pi = type.GetPropertyInfo(propertyName, bindingFlags);
-
-            if (pi == null)
-            {
-                throw new InvalidOperationException($"Property {propertyName} was not found on type {type.FullName}");
-            }
-
-            var result = pi.GetPropertyValue<T>(null);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Retrieves a property value from a given object.
-        /// </summary>
-        /// <typeparam name="T">Type of the property.</typeparam>
-        /// <param name="item">Object from which the property value is returned.</param>
-        /// <param name="propertyName">The name of the property.</param>
-        /// <param name="bindingFlags">Optional binding flags to use during reflection operations.</param>
-        /// <returns>
-        /// The value of the property.
-        /// </returns>
-        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
-        /// <exception cref="InvalidOperationException">The property was not found.</exception>
-        /// <exception cref="InvalidCastException">The property is not of the specified type.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
-        public static T GetPropertyValue<T>(
-            this object item,
-            string propertyName,
-            BindingFlags bindingFlags = DefaultBindingFlags)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException(nameof(item));
-            }
-
-            var pi = item.GetType().GetPropertyInfo(propertyName, bindingFlags);
-
-            if (pi == null)
-            {
-                throw new InvalidOperationException($"Property {propertyName} was not found on type {item.GetType().FullName}");
-            }
-
-            var result = pi.GetPropertyValue<T>(item);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Sets a property value in a given Object.
-        /// </summary>
-        /// <typeparam name="T">Type of the property.</typeparam>
-        /// <param name="type">Type to set property value on (will only set static properties).</param>
-        /// <param name="propertyName">The name of the property to set.</param>
-        /// <param name="value">Value to set.</param>
-        /// <param name="bindingFlags">Optional binding flags to use during reflection operations.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
-        /// <exception cref="InvalidOperationException">The property was not found.</exception>
-        /// <exception cref="InvalidCastException">The property is not of type T.</exception>
-        /// <remarks>
-        /// adapted from: <a href="http://stackoverflow.com/questions/1565734/is-it-possible-to-set-private-property-via-reflection/1565766#1565766" />.
-        /// </remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
-        public static void SetPropertyValue<T>(
-            this Type type,
-            string propertyName,
-            T value,
-            BindingFlags bindingFlags = DefaultBindingFlags)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            var pi = type.GetPropertyInfo(propertyName, bindingFlags);
-
-            if (pi == null)
-            {
-                throw new InvalidOperationException($"Property {propertyName} was not found on type {type.FullName}");
-            }
-
-            pi.SetPropertyValue(null, value);
-        }
-
-        /// <summary>
-        /// Sets a property value in a given Object.
-        /// </summary>
-        /// <typeparam name="T">Type of the property.</typeparam>
-        /// <param name="item">Object containing property to set.</param>
-        /// <param name="propertyName">The name of the property to set.</param>
-        /// <param name="value">Value to set.</param>
-        /// <param name="bindingFlags">Optional binding flags to use during reflection operations.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
-        /// <exception cref="InvalidOperationException">The property was not found.</exception>
-        /// <exception cref="InvalidCastException">The property is not of type T.</exception>
-        /// <remarks>
-        /// adapted from: <a href="http://stackoverflow.com/questions/1565734/is-it-possible-to-set-private-property-via-reflection/1565766#1565766" />.
-        /// </remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
-        public static void SetPropertyValue<T>(
-            this object item,
-            string propertyName,
-            T value,
-            BindingFlags bindingFlags = DefaultBindingFlags)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException(nameof(item));
-            }
-
-            var pi = item.GetType().GetPropertyInfo(propertyName, bindingFlags);
-
-            if (pi == null)
-            {
-                throw new InvalidOperationException($"Property {propertyName} was not found in Type {item.GetType().FullName}");
-            }
-
-            pi.SetPropertyValue(item, value);
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        private static T GetPropertyValue<T>(
-            this PropertyInfo pi,
-            object item)
-        {
-            if (pi == null)
-            {
-                throw new ArgumentException(nameof(PropertyInfo) + " must not be null", nameof(pi));
-            }
-
-            Type returnType = typeof(T);
-
-            try
-            {
-                var value = pi.GetValue(item, null);
-
-                if (value == null)
-                {
-                    // can't solely rely on the ( T ) cast - if pi.GetValue returns null, then null can be casted to any reference type.
-                    if (!pi.PropertyType.IsAssignableTo(returnType))
-                    {
-                        throw new InvalidCastException($"Unable to cast object of type '{pi.PropertyType.FullName}' to type '{returnType.FullName}'.");
-                    }
-                }
-
-                var result = (T)value;
-
-                return result;
-            }
-            catch (NullReferenceException)
-            {
-                // if result the value is null, then attempt to cast to value type will result in NullReferenceException
-                throw new InvalidCastException($"Unable to cast object of type '{pi.PropertyType.FullName}' to type '{returnType.FullName}'.");
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        private static void SetPropertyValue<T>(
-            this PropertyInfo pi,
-            object item,
-            T value)
-        {
-            if (pi == null)
-            {
-                throw new ArgumentException(nameof(PropertyInfo) + " must not be null", nameof(pi));
-            }
-
-            try
-            {
-                pi.SetValue(item, value, null);
-            }
-            catch (ArgumentException ex)
-            {
-                throw new InvalidCastException(ex.Message);
-            }
-        }
-
-        private static PropertyInfo GetPropertyInfo(
-            this Type type,
-            string propertyName,
-            BindingFlags bindingFlags)
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
         {
             if (type == null)
             {
@@ -298,19 +132,319 @@ namespace OBeautifulCode.Reflection.Recipes
 
             if (string.IsNullOrWhiteSpace(propertyName))
             {
-                throw new ArgumentException("The name of the property is whitespace.", nameof(propertyName));
+                throw new ArgumentException(Invariant($"{nameof(propertyName)} is white space."));
             }
 
-            PropertyInfo result = null;
+            PropertyInfo result;
 
-            while ((result == null) && (type != null))
+            try
             {
                 result = type.GetProperty(propertyName, bindingFlags);
 
-                type = type.BaseType;
+                if (result == null)
+                {
+                    throw new ArgumentException(Invariant($"There is no property named '{propertyName}' on type '{type.ToStringReadable()}', using the specified binding constraints."));
+                }
+            }
+            catch (AmbiguousMatchException)
+            {
+                throw new ArgumentException(Invariant($"There is more than one property named '{propertyName}' on type '{type.ToStringReadable()}', using the specified binding constraints."));
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets the value of a property.
+        /// </summary>
+        /// <typeparam name="T">The type of the property.</typeparam>
+        /// <param name="item">The object.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
+        /// <returns>
+        /// The value of the property.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no property named <paramref name="propertyName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one property named <paramref name="propertyName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">The property does not have a get method.</exception>
+        /// <exception cref="InvalidCastException">The property is not of the specified type.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static T GetPropertyValue<T>(
+            this object item,
+            string propertyName,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
+        {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            var propertyInfo = item.GetType().GetPropertyInfo(propertyName, bindingFlags);
+
+            var propertyValue = propertyInfo.GetValue(item);
+
+            var result = propertyValue.CastOrThrowIfTypeMismatch<T>(propertyInfo);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the value of a property.
+        /// </summary>
+        /// <param name="item">The object.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
+        /// <returns>
+        /// The value of the property.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no property named <paramref name="propertyName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one property named <paramref name="propertyName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">The property does not have a get method.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static object GetPropertyValue(
+            this object item,
+            string propertyName,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
+        {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            var propertyInfo = item.GetType().GetPropertyInfo(propertyName, bindingFlags);
+
+            var result = propertyInfo.GetValue(item);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the value of a static property.
+        /// </summary>
+        /// <typeparam name="T">The type of the property.</typeparam>
+        /// <param name="type">The type that contains the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedStaticMembers"/>.</param>
+        /// <returns>
+        /// The value of the property.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no property named <paramref name="propertyName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one property named <paramref name="propertyName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">The property does not have a get method.</exception>
+        /// <exception cref="ArgumentException">The property is not static.</exception>
+        /// <exception cref="InvalidCastException">The property is not of the specified type.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static T GetStaticPropertyValue<T>(
+            this Type type,
+            string propertyName,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedStaticMembers)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var propertyInfo = type.GetPropertyInfo(propertyName, bindingFlags);
+
+            object propertyValue;
+
+            try
+            {
+                propertyValue = propertyInfo.GetValue(null);
+            }
+            catch (TargetException)
+            {
+                throw new ArgumentException("The property is not static.");
+            }
+
+            var result = propertyValue.CastOrThrowIfTypeMismatch<T>(propertyInfo);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the value of a property on a static type.
+        /// </summary>
+        /// <param name="type">The type that contains the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedStaticMembers"/>.</param>
+        /// <returns>
+        /// The value of the property.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no property named <paramref name="propertyName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one property named <paramref name="propertyName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">The property does not have a get method.</exception>
+        /// <exception cref="ArgumentException">The property is not static.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static object GetStaticPropertyValue(
+            this Type type,
+            string propertyName,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedStaticMembers)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var propertyInfo = type.GetPropertyInfo(propertyName, bindingFlags);
+
+            object result;
+
+            try
+            {
+                result = propertyInfo.GetValue(null);
+            }
+            catch (TargetException)
+            {
+                throw new ArgumentException("The property is not static.");
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Sets a property's value.
+        /// </summary>
+        /// <param name="item">The object.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="value">The value to set the property to.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no property named <paramref name="propertyName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one property named <paramref name="propertyName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="InvalidCastException">Unable to assign null to the property's type.</exception>
+        /// <exception cref="InvalidCastException">Unable to assign <paramref name="value"/> type to the property's type.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static void SetPropertyValue(
+            this object item,
+            string propertyName,
+            object value,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
+        {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            var propertyInfo = item.GetType().GetPropertyInfo(propertyName, bindingFlags);
+
+            value.ThrowIfNotAssignableTo(propertyInfo);
+
+            propertyInfo.SetValue(item, value);
+        }
+
+        /// <summary>
+        /// Sets a static property's value.
+        /// </summary>
+        /// <param name="type">The type that contains the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="value">The value to set the property to.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedStaticMembers"/>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="propertyName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="propertyName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no property named <paramref name="propertyName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one property named <paramref name="propertyName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="InvalidCastException">Unable to assign null to the property's type.</exception>
+        /// <exception cref="InvalidCastException">Unable to assign <paramref name="value"/> type to the property's type.</exception>
+        /// <exception cref="ArgumentException">The property is not static.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static void SetStaticPropertyValue(
+            this Type type,
+            string propertyName,
+            object value,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedStaticMembers)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var propertyInfo = type.GetPropertyInfo(propertyName, bindingFlags);
+
+            value.ThrowIfNotAssignableTo(propertyInfo);
+
+            try
+            {
+                propertyInfo.SetValue(null, value);
+            }
+            catch (TargetException)
+            {
+                throw new ArgumentException("The property is not static.");
+            }
+        }
+
+        private static T CastOrThrowIfTypeMismatch<T>(
+            this object propertyValue,
+            PropertyInfo propertyInfo)
+        {
+            var returnType = typeof(T);
+
+            T result;
+
+            if (propertyValue == null)
+            {
+                // can't solely rely on the (T) cast - if pi.GetValue returns null, then null can be cast to any reference type.
+                var propertyType = propertyInfo.PropertyType;
+
+                if (!returnType.IsAssignableFrom(propertyType))
+                {
+                    throw new InvalidCastException(Invariant($"Unable to cast object of type '{propertyType.ToStringReadable()}' to type '{returnType.ToStringReadable()}'."));
+                }
+
+                result = default;
+            }
+            else
+            {
+                try
+                {
+                    result = (T)propertyValue;
+                }
+                catch (InvalidCastException)
+                {
+                    throw new InvalidCastException(Invariant($"Unable to cast object of type '{propertyValue.GetType().ToStringReadable()}' to type '{returnType.ToStringReadable()}'."));
+                }
+            }
+
+            return result;
+        }
+
+        private static void ThrowIfNotAssignableTo(
+            this object value,
+            PropertyInfo propertyInfo)
+        {
+            var propertyType = propertyInfo.PropertyType;
+
+            if (value == null)
+            {
+                if (!propertyType.IsClosedTypeAssignableToNull())
+                {
+                    throw new InvalidCastException(Invariant($"Unable to assign null value to property of type '{propertyType.ToStringReadable()}'."));
+                }
+            }
+            else
+            {
+                var valueType = value.GetType();
+
+                if (!propertyType.IsAssignableFrom(valueType))
+                {
+                    throw new InvalidCastException(Invariant($"Unable to assign value of type '{valueType.ToStringReadable()}' to property of type '{propertyType.ToStringReadable()}'."));
+                }
+            }
         }
     }
 }

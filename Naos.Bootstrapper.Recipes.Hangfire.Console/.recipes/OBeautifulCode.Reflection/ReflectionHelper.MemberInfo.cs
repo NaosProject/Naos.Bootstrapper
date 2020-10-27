@@ -14,9 +14,6 @@ namespace OBeautifulCode.Reflection.Recipes
     using global::System.Reflection;
     using global::System.Runtime.CompilerServices;
 
-    /// <summary>
-    /// Provides useful methods related to reflection.
-    /// </summary>
 #if !OBeautifulCodeReflectionSolution
     internal
 #else

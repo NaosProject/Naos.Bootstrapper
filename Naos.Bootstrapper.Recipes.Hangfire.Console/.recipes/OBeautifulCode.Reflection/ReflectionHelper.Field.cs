@@ -11,14 +11,15 @@ namespace OBeautifulCode.Reflection.Recipes
 {
     using global::System;
     using global::System.Collections.Generic;
+    using global::System.Diagnostics.CodeAnalysis;
     using global::System.Linq;
     using global::System.Reflection;
 
+    using OBeautifulCode.CodeAnalysis.Recipes;
     using OBeautifulCode.Type.Recipes;
 
-    /// <summary>
-    /// Provides useful methods related to reflection.
-    /// </summary>
+    using static global::System.FormattableString;
+
 #if !OBeautifulCodeReflectionSolution
     internal
 #else
@@ -27,256 +28,22 @@ namespace OBeautifulCode.Reflection.Recipes
     static partial class ReflectionHelper
     {
         /// <summary>
-        /// Determines if an object has a given field.
+        /// Determines if a type has a field of the specified field name.
         /// </summary>
-        /// <param name="item">Object to check for field.</param>
+        /// <param name="type">The type to check.</param>
         /// <param name="fieldName">The name of the field to check for.</param>
-        /// <param name="bindingFlags">Optional binding flags to use during reflection operations.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
         /// <returns>
-        /// true if the object has the specified field, false if not.
+        /// true if the type has a field of the specified field name, false if not.
         /// </returns>
-        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
         public static bool HasField(
-            this object item,
-            string fieldName,
-            BindingFlags bindingFlags = DefaultBindingFlags) =>
-            GetFieldInfo(item?.GetType(), fieldName, bindingFlags) != null;
-
-        /// <summary>
-        /// Gets the names of all fields.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        /// <param name="bindingFlags">The binding flags to use.</param>
-        /// <returns>Collection of property names.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
-        public static IReadOnlyCollection<string> GetFieldNames(
-            this Type type,
-            BindingFlags bindingFlags = DefaultBindingFlags)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            var allProperties = type.GetFields(bindingFlags);
-
-            var result = allProperties.Select(_ => _.Name).ToList();
-
-            return result;
-        }
-
-        /// <summary>
-        /// Returns a field value from a given object.
-        /// </summary>
-        /// <typeparam name="T">Type of the field.</typeparam>
-        /// <param name="type">Type to get field value on (will only get static fields).</param>
-        /// <param name="fieldName">The name of the field.</param>
-        /// <param name="bindingFlags">Optional binding flags to use during reflection operations.</param>
-        /// <returns>
-        /// The value of the field.
-        /// </returns>
-        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
-        /// <exception cref="InvalidOperationException">The field was not found.</exception>
-        /// <exception cref="InvalidCastException">The field is not of type T.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
-        public static T GetFieldValue<T>(
             this Type type,
             string fieldName,
-            BindingFlags bindingFlags = DefaultBindingFlags)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            var fi = type.GetFieldInfo(fieldName, bindingFlags);
-
-            if (fi == null)
-            {
-                throw new InvalidOperationException($"Field {fieldName} was not found on type {type.FullName}");
-            }
-
-            var result = fi.GetFieldValue<T>(null);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Returns a field value from a given object.
-        /// </summary>
-        /// <typeparam name="T">Type of the field.</typeparam>
-        /// <param name="item">Object from which the field value is returned.</param>
-        /// <param name="fieldName">The name of the field.</param>
-        /// <param name="bindingFlags">Optional binding flags to use during reflection operations.</param>
-        /// <returns>
-        /// The value of the field.
-        /// </returns>
-        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
-        /// <exception cref="InvalidOperationException">The field was not found.</exception>
-        /// <exception cref="InvalidCastException">The field is not of type T.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
-        public static T GetFieldValue<T>(
-            this object item,
-            string fieldName,
-            BindingFlags bindingFlags = DefaultBindingFlags)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException(nameof(item));
-            }
-
-            var fi = item.GetType().GetFieldInfo(fieldName, bindingFlags);
-
-            if (fi == null)
-            {
-                throw new InvalidOperationException($"Field {fieldName} was not found on type {item.GetType().FullName}");
-            }
-
-            var result = fi.GetFieldValue<T>(item);
-
-            return result;
-        }
-
-        /// <summary>
-        /// Set a field value in a given Object.
-        /// </summary>
-        /// <typeparam name="T">Type of the field.</typeparam>
-        /// <param name="type">Type to set field value on (will only set static fields).</param>
-        /// <param name="fieldName">The name of the field to set..</param>
-        /// <param name="value">The value to set.</param>
-        /// <param name="bindingFlags">Optional binding flags to use during reflection operations.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
-        /// <exception cref="InvalidOperationException">The field was not found.</exception>
-        /// <exception cref="InvalidCastException">The property is not of type T.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
-        public static void SetFieldValue<T>(
-            this Type type,
-            string fieldName,
-            T value,
-            BindingFlags bindingFlags = DefaultBindingFlags)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            var fi = type.GetFieldInfo(fieldName, bindingFlags);
-
-            if (fi == null)
-            {
-                throw new InvalidOperationException($"Field {fieldName} was not found in Type {type.FullName}");
-            }
-
-            fi.SetFieldValue(null, value);
-        }
-
-        /// <summary>
-        /// Set a field value in a given Object.
-        /// </summary>
-        /// <typeparam name="T">Type of the field.</typeparam>
-        /// <param name="item">Object containing field to set.</param>
-        /// <param name="fieldName">The name of the field to set..</param>
-        /// <param name="value">The value to set.</param>
-        /// <param name="bindingFlags">Optional binding flags to use during reflection operations.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
-        /// <exception cref="InvalidOperationException">The field was not found.</exception>
-        /// <exception cref="InvalidCastException">The property is not of type T.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = "Correct name.")]
-        public static void SetFieldValue<T>(
-            this object item,
-            string fieldName,
-            T value,
-            BindingFlags bindingFlags = DefaultBindingFlags)
-        {
-            if (item == null)
-            {
-                throw new ArgumentNullException(nameof(item));
-            }
-
-            var fi = item.GetType().GetFieldInfo(fieldName, bindingFlags);
-            if (fi == null)
-            {
-                throw new InvalidOperationException($"Field {fieldName} was not found in Type {item.GetType().FullName}");
-            }
-
-            fi.SetFieldValue(item, value);
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        private static T GetFieldValue<T>(
-            this FieldInfo fi,
-            object item)
-        {
-            if (fi == null)
-            {
-                throw new ArgumentNullException(nameof(fi));
-            }
-
-            Type returnType = typeof(T);
-            try
-            {
-                var value = fi.GetValue(item);
-
-                if (value == null)
-                {
-                    // can't solely rely on the ( T ) cast - if fi.GetValue returns null, then null can be cast to any reference type.
-                    if (!fi.FieldType.IsAssignableTo(returnType))
-                    {
-                        throw new InvalidCastException($"Unable to cast object of type '{fi.FieldType.FullName}' to type '{returnType.FullName}'.");
-                    }
-                }
-
-                var result = (T)value;
-
-                return result;
-            }
-            catch (NullReferenceException)
-            {
-                // if result of GetValue is null, then attempt to cast to value type will result in NullReferenceException
-                throw new InvalidCastException($"Unable to cast object of type '{fi.FieldType.FullName}' to type '{returnType.FullName}'.");
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.String.Format(System.String,System.Object,System.Object)", Justification = "This is a developer-facing string, not a user-facing string.")]
-        private static void SetFieldValue<T>(
-            this FieldInfo fi,
-            object item,
-            T value)
-        {
-            if (fi == null)
-            {
-                throw new ArgumentException(nameof(FieldInfo) + " must not be null", nameof(fi));
-            }
-
-            try
-            {
-                fi.SetValue(item, value);
-            }
-            catch (ArgumentException ex)
-            {
-                throw new InvalidCastException(ex.Message);
-            }
-        }
-
-        private static FieldInfo GetFieldInfo(
-            this Type type,
-            string fieldName,
-            BindingFlags bindingFlags)
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
         {
             if (type == null)
             {
@@ -290,19 +57,394 @@ namespace OBeautifulCode.Reflection.Recipes
 
             if (string.IsNullOrWhiteSpace(fieldName))
             {
-                throw new ArgumentException("The name of the field is whitespace.", nameof(fieldName));
+                throw new ArgumentException(Invariant($"{nameof(fieldName)} is white space."));
             }
 
-            FieldInfo result = null;
+            bool result;
 
-            while ((result == null) && (type != null))
+            try
             {
-                result = type.GetField(fieldName, bindingFlags);
-
-                type = type.BaseType;
+                result = type.GetField(fieldName, bindingFlags) != null;
+            }
+            catch (AmbiguousMatchException)
+            {
+                result = true;
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets the name of all of the fields.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
+        /// <returns>
+        /// The field names.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static IReadOnlyCollection<string> GetFieldNames(
+            this Type type,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var allFields = type.GetFields(bindingFlags);
+
+            var result = allFields.Select(_ => _.Name).ToList();
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the <see cref="FieldInfo"/> for the specified field.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="fieldName">The name of the field.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
+        /// <returns>
+        /// The <see cref="FieldInfo"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no field named <paramref name="fieldName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one field named <paramref name="fieldName"/> on the object type using the specified binding constraints.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static FieldInfo GetFieldInfo(
+            this Type type,
+            string fieldName,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            if (fieldName == null)
+            {
+                throw new ArgumentNullException(nameof(fieldName));
+            }
+
+            if (string.IsNullOrWhiteSpace(fieldName))
+            {
+                throw new ArgumentException(Invariant($"{nameof(fieldName)} is white space."));
+            }
+
+            FieldInfo result;
+
+            try
+            {
+                result = type.GetField(fieldName, bindingFlags);
+
+                if (result == null)
+                {
+                    throw new ArgumentException(Invariant($"There is no field named '{fieldName}' on type '{type.ToStringReadable()}', using the specified binding constraints."));
+                }
+            }
+            catch (AmbiguousMatchException)
+            {
+                throw new ArgumentException(Invariant($"There is more than one field named '{fieldName}' on type '{type.ToStringReadable()}', using the specified binding constraints."));
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the value of a field.
+        /// </summary>
+        /// <typeparam name="T">The type of the field.</typeparam>
+        /// <param name="item">The object.</param>
+        /// <param name="fieldName">The name of the field.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
+        /// <returns>
+        /// The value of the field.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no field named <paramref name="fieldName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one field named <paramref name="fieldName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">The field does not have a get method.</exception>
+        /// <exception cref="InvalidCastException">The field is not of the specified type.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static T GetFieldValue<T>(
+            this object item,
+            string fieldName,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
+        {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            var fieldInfo = item.GetType().GetFieldInfo(fieldName, bindingFlags);
+
+            var fieldValue = fieldInfo.GetValue(item);
+
+            var result = fieldValue.CastOrThrowIfTypeMismatch<T>(fieldInfo);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the value of a field.
+        /// </summary>
+        /// <param name="item">The object.</param>
+        /// <param name="fieldName">The name of the field.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
+        /// <returns>
+        /// The value of the field.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no field named <paramref name="fieldName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one field named <paramref name="fieldName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">The field does not have a get method.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static object GetFieldValue(
+            this object item,
+            string fieldName,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
+        {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            var fieldInfo = item.GetType().GetFieldInfo(fieldName, bindingFlags);
+
+            var result = fieldInfo.GetValue(item);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the value of a static field.
+        /// </summary>
+        /// <typeparam name="T">The type of the field.</typeparam>
+        /// <param name="type">The type that contains the field.</param>
+        /// <param name="fieldName">The name of the field.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedStaticMembers"/>.</param>
+        /// <returns>
+        /// The value of the field.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no field named <paramref name="fieldName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one field named <paramref name="fieldName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">The field does not have a get method.</exception>
+        /// <exception cref="ArgumentException">The field is not static.</exception>
+        /// <exception cref="InvalidCastException">The field is not of the specified type.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static T GetStaticFieldValue<T>(
+            this Type type,
+            string fieldName,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedStaticMembers)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var fieldInfo = type.GetFieldInfo(fieldName, bindingFlags);
+
+            object fieldValue;
+
+            try
+            {
+                fieldValue = fieldInfo.GetValue(null);
+            }
+            catch (TargetException)
+            {
+                throw new ArgumentException("The field is not static.");
+            }
+
+            var result = fieldValue.CastOrThrowIfTypeMismatch<T>(fieldInfo);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the value of a field on a static type.
+        /// </summary>
+        /// <param name="type">The type that contains the field.</param>
+        /// <param name="fieldName">The name of the field.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedStaticMembers"/>.</param>
+        /// <returns>
+        /// The value of the field.
+        /// </returns>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no field named <paramref name="fieldName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one field named <paramref name="fieldName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">The field does not have a get method.</exception>
+        /// <exception cref="ArgumentException">The field is not static.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static object GetStaticFieldValue(
+            this Type type,
+            string fieldName,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedStaticMembers)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var fieldInfo = type.GetFieldInfo(fieldName, bindingFlags);
+
+            object result;
+
+            try
+            {
+                result = fieldInfo.GetValue(null);
+            }
+            catch (TargetException)
+            {
+                throw new ArgumentException("The field is not static.");
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Sets a field's value.
+        /// </summary>
+        /// <param name="item">The object.</param>
+        /// <param name="fieldName">The name of the field.</param>
+        /// <param name="value">The value to set the field to.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedMembers"/>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="item"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no field named <paramref name="fieldName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one field named <paramref name="fieldName"/> on the object type using the specified binding constraints.</exception>
+        /// <exception cref="InvalidCastException">Unable to assign null to the field's type.</exception>
+        /// <exception cref="InvalidCastException">Unable to assign <paramref name="value"/> type to the field's type.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static void SetFieldValue(
+            this object item,
+            string fieldName,
+            object value,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedMembers)
+        {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            var fieldInfo = item.GetType().GetFieldInfo(fieldName, bindingFlags);
+
+            value.ThrowIfNotAssignableTo(fieldInfo);
+
+            fieldInfo.SetValue(item, value);
+        }
+
+        /// <summary>
+        /// Sets a static field's value.
+        /// </summary>
+        /// <param name="type">The type that contains the field.</param>
+        /// <param name="fieldName">The name of the field.</param>
+        /// <param name="value">The value to set the field to.</param>
+        /// <param name="bindingFlags">OPTIONAL binding flags to use when searching.  DEFAULT is to filter to <see cref="BindingFlagsFor.AllDeclaredAndInheritedStaticMembers"/>.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> is null.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="fieldName"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fieldName"/> is whitespace.</exception>
+        /// <exception cref="ArgumentException">There is no field named <paramref name="fieldName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="ArgumentException">There is more than one field named <paramref name="fieldName"/> on type <paramref name="type"/> using the specified binding constraints.</exception>
+        /// <exception cref="InvalidCastException">Unable to assign null to the field's type.</exception>
+        /// <exception cref="InvalidCastException">Unable to assign <paramref name="value"/> type to the field's type.</exception>
+        /// <exception cref="ArgumentException">The field is not static.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flags", Justification = ObcSuppressBecause.CA1726_UsePreferredTerms_NameOfTypeOfIdentifierUsesTheTermFlags)]
+        public static void SetStaticFieldValue(
+            this Type type,
+            string fieldName,
+            object value,
+            BindingFlags bindingFlags = BindingFlagsFor.AllDeclaredAndInheritedStaticMembers)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            var fieldInfo = type.GetFieldInfo(fieldName, bindingFlags);
+
+            value.ThrowIfNotAssignableTo(fieldInfo);
+
+            try
+            {
+                fieldInfo.SetValue(null, value);
+            }
+            catch (TargetException)
+            {
+                throw new ArgumentException("The field is not static.");
+            }
+        }
+
+        private static T CastOrThrowIfTypeMismatch<T>(
+            this object fieldValue,
+            FieldInfo fieldInfo)
+        {
+            var returnType = typeof(T);
+
+            T result;
+
+            if (fieldValue == null)
+            {
+                // can't solely rely on the (T) cast - if pi.GetValue returns null, then null can be cast to any reference type.
+                var fieldType = fieldInfo.FieldType;
+
+                if (!returnType.IsAssignableFrom(fieldType))
+                {
+                    throw new InvalidCastException(Invariant($"Unable to cast object of type '{fieldType.ToStringReadable()}' to type '{returnType.ToStringReadable()}'."));
+                }
+
+                result = default;
+            }
+            else
+            {
+                try
+                {
+                    result = (T)fieldValue;
+                }
+                catch (InvalidCastException)
+                {
+                    throw new InvalidCastException(Invariant($"Unable to cast object of type '{fieldValue.GetType().ToStringReadable()}' to type '{returnType.ToStringReadable()}'."));
+                }
+            }
+
+            return result;
+        }
+
+        private static void ThrowIfNotAssignableTo(
+            this object value,
+            FieldInfo fieldInfo)
+        {
+            var fieldType = fieldInfo.FieldType;
+
+            if (value == null)
+            {
+                if (!fieldType.IsClosedTypeAssignableToNull())
+                {
+                    throw new InvalidCastException(Invariant($"Unable to assign null value to field of type '{fieldType.ToStringReadable()}'."));
+                }
+            }
+            else
+            {
+                var valueType = value.GetType();
+
+                if (!fieldType.IsAssignableFrom(valueType))
+                {
+                    throw new InvalidCastException(Invariant($"Unable to assign value of type '{valueType.ToStringReadable()}' to field of type '{fieldType.ToStringReadable()}'."));
+                }
+            }
         }
     }
 }
