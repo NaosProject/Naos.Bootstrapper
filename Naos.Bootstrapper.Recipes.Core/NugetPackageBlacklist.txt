@@ -1,5 +1,20 @@
-﻿# need to do this once we are off of all usages or the Spritely.ReadModel.Mongo # regex:^Spritely
+﻿# --- external projects ---
+regex:^CoMetrics
+regex:^Newtonsoft
+# regex:^Spritely  #need to do this once we are off of all usages or the Spritely.ReadModel.Mongo#
 
+# --- external packages ---
+Its.Configuration
+
+regex:^Spritely.Foundations.
+
+Spritely.Recipes.JsonConfiguration
+Spritely.Recipes.CamelStrictConstructorContractResolver
+Spritely.Recipes.InheritedTypeJsonConverter
+Spritely.Recipes.SecureStringJsonConverter
+Spritely.Recipes.SecureString
+
+# --- NAOS ----
 regex:^Naos.Serialization
 regex:^Naos.Compression
 
@@ -11,19 +26,14 @@ Naos.Recipes.Configuration.Bootstrapper
 Naos.Recipes.Configuration.Setup
 Naos.Recipes.InitializeTestProject
 
-regex:^Spritely.Foundations.
-
-Spritely.Recipes.JsonConfiguration
-Spritely.Recipes.CamelStrictConstructorContractResolver
-Spritely.Recipes.InheritedTypeJsonConverter
-Spritely.Recipes.SecureStringJsonConverter
-Spritely.Recipes.SecureString
-Its.Configuration
-
+# --- OBC ----
 OBeautifulCode.AccountingTime.BsonSerialization
 OBeautifulCode.AccountingTime.JsonSerialization
 OBeautifulCode.AccountingTime.Test.DummyFactory
 OBeautifulCode.AutoFakeItEasy.Test
+OBeautifulCode.Bootstrapper.Recipes.CodeGen.ModelObject
+OBeautifulCode.Bootstrapper.Recipes.CodeGen.ModelObject.Test
+OBeautifulCode.Bootstrapper.Recipes.CodeGen.Core.ModelObject.Test
 OBeautifulCode.Bootstrapper.Recipes.Test
 OBeautifulCode.CodeGen
 OBeautifulCode.Collection
@@ -64,6 +74,7 @@ OBeautifulCode.Reflection.AssemblyHelper
 OBeautifulCode.Reflection.Recipes.TypeHelper
 OBeautifulCode.Reflection.ReflectionHelper
 OBeautifulCode.Reflection.Test
+OBeautifulCode.Representation.Recipes.DummyFactory
 OBeautifulCode.Representation.Recipes.TypeExtensions
 OBeautifulCode.Representation.System.Recipes.TypeExtensions
 OBeautifulCode.Security
