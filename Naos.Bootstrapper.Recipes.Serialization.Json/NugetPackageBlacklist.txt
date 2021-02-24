@@ -1,2 +1,5 @@
 ﻿# things that do NOT belong in 'Serialization.Json' projects
 MongoDB.Bson
+
+# Newtonsoft is now forked and compiled into OBC.Serialization.Json, newtonsoft specific needs should be in another assembly.
+Newtonsoft.Json
