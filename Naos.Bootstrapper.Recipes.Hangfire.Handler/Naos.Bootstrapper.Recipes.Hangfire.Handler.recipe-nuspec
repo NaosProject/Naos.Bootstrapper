@@ -13,6 +13,7 @@
       <dependency id="Naos.Cron.Serialization.Json" version="1.0.25" />
       <dependency id="Naos.Diagnostics.Domain" version="1.3.36" />
       <dependency id="Naos.MessageBus.Domain" version="1.3.33" />
+      <dependency id="Naos.Protocol.Domain" version="1.0.94" />
       <dependency id="Naos.Telemetry.Domain" version="1.0.25" />
       <dependency id="Newtonsoft.Json" version="[9.0.1]" />
       <dependency id="OBeautifulCode.Compression" version="1.0.20" />

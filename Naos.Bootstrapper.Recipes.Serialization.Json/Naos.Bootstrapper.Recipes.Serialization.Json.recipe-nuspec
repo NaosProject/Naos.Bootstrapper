@@ -12,7 +12,6 @@
       <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
       <dependency id="Naos.Protocol.Domain" version="1.0.94" />
       <dependency id="Naos.Protocol.Serialization.Json" version="1.0.94" />
-      <dependency id="Newtonsoft.Json" version="[9.0.1]" />
       <dependency id="OBeautifulCode.Compression" version="1.0.20" />
       <dependency id="OBeautifulCode.Representation.System" version="1.0.57" />
       <dependency id="OBeautifulCode.Serialization" version="1.0.104" />

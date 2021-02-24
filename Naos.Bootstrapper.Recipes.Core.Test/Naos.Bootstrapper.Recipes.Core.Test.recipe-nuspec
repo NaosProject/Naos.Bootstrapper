@@ -32,7 +32,6 @@
       <dependency id="Naos.Protocol.Domain" version="1.0.94" />
       <dependency id="Naos.Protocol.Recipes.DummyFactory" version="1.0.94" />
       <dependency id="Naos.Telemetry.Domain" version="1.0.25" />
-      <dependency id="Newtonsoft.Json" version="[9.0.1]" />
       <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.28" />
       <dependency id="OBeautifulCode.AutoFakeItEasy" version="1.0.132" />
       <dependency id="OBeautifulCode.CodeAnalysis.Recipes.SuppressBecause" version="1.0.14" />
@@ -41,11 +40,13 @@
       <dependency id="OBeautifulCode.Compression" version="1.0.20" />
       <dependency id="OBeautifulCode.Compression.Recipes.CompressionHelper" version="1.0.20" />
       <dependency id="OBeautifulCode.Compression.Recipes.DummyFactory" version="1.0.20" />
+      <dependency id="OBeautifulCode.Enum.Recipes.EnumExtensions" version="1.0.24" />
       <dependency id="OBeautifulCode.Equality.Recipes.EqualityHelpers" version="1.0.23" />
       <dependency id="OBeautifulCode.Math.Recipes.ThreadSafeRandom" version="1.0.77" />
       <dependency id="OBeautifulCode.Process.Recipes.ProcessHelper" version="1.0.10" />
       <dependency id="OBeautifulCode.Reflection.Recipes.AppDomainHelper" version="1.0.110" />
       <dependency id="OBeautifulCode.Reflection.Recipes.AssemblyHelper" version="1.0.110" />
+      <dependency id="OBeautifulCode.Reflection.Recipes.ReflectionHelper" version="1.0.110" />
       <dependency id="OBeautifulCode.Representation.System" version="1.0.57" />
       <dependency id="OBeautifulCode.Representation.System.Recipes.DummyFactory" version="1.0.57" />
       <dependency id="OBeautifulCode.Serialization" version="1.0.104" />

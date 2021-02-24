@@ -1,5 +1,6 @@
 ﻿# --- external projects ---
 regex:^CoMetrics
+regex:^Newtonsoft
 # regex:^Spritely  #need to do this once we are off of all usages or the Spritely.ReadModel.Mongo#
 
 # --- external packages ---

@@ -31,6 +31,7 @@
       <dependency id="Microsoft.Owin.Security" version="[3.0.1]" />
       <dependency id="Microsoft.Owin.Security.Jwt" version="[3.0.1]" />
       <dependency id="Microsoft.Owin.Security.OAuth" version="[3.0.1]" />
+      <dependency id="Newtonsoft.Json" version="[9.0.1]" />
       <dependency id="Owin" version="[1.0]" />
       <dependency id="SimpleInjector" version="[3.3.2]" />
       <dependency id="SimpleInjector.Extensions.ExecutionContextScoping" version="[3.3.2]" />
