@@ -18,6 +18,11 @@ Spritely.Recipes.SecureString
 regex:^Naos.Serialization
 regex:^Naos.Compression
 
+Naos.Database.Mongo.Administration
+Naos.Database.Mongo.Domain
+Naos.Database.SqlServer.Administration
+Naos.Database.SqlServer.Domain
+
 Naos.Recipes.Console.ExampleConfig
 Naos.Recipes.Console.Bootstrapper
 Naos.Recipes.Console.Domain
