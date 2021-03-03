@@ -1,6 +1,5 @@
 ﻿# --- external projects ---
 regex:^CoMetrics
-regex:^Newtonsoft
 # regex:^Spritely  #need to do this once we are off of all usages or the Spritely.ReadModel.Mongo#
 
 # --- external packages ---
@@ -17,11 +16,8 @@ Spritely.Recipes.SecureString
 # --- NAOS ----
 regex:^Naos.Serialization
 regex:^Naos.Compression
-
-Naos.Database.Mongo.Administration
-Naos.Database.Mongo.Domain
-Naos.Database.SqlServer.Administration
-Naos.Database.SqlServer.Domain
+regex:^Naos.Database.Mongo
+regex:^Naos.Database.SqlServer
 
 Naos.Recipes.Console.ExampleConfig
 Naos.Recipes.Console.Bootstrapper
