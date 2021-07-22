@@ -11,14 +11,12 @@
       <dependency id="Naos.Bootstrapper.Recipes.Core.Assembly" version="$version$" />
       <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
       <dependency id="MongoDB.Bson" version="[2.4.4]" />
-      <dependency id="Naos.Protocol.Domain" version="1.0.94" />
-      <dependency id="Naos.Protocol.Serialization.Bson" version="1.0.94" />
-      <dependency id="OBeautifulCode.Compression" version="1.0.20" />
-      <dependency id="OBeautifulCode.Representation.System" version="1.0.57" />
-      <dependency id="OBeautifulCode.Serialization" version="1.0.104" />
-      <dependency id="OBeautifulCode.Serialization.Bson" version="1.0.104" />
-      <dependency id="OBeautifulCode.Type" version="1.0.78" />
-      <dependency id="OBeautifulCode.Type.Recipes.AssemblyExtensions" version="1.0.78" />
+      <dependency id="OBeautifulCode.Compression" version="1.0.22" />
+      <dependency id="OBeautifulCode.Representation.System" version="1.0.60" />
+      <dependency id="OBeautifulCode.Serialization" version="1.0.112" />
+      <dependency id="OBeautifulCode.Serialization.Bson" version="1.0.112" />
+      <dependency id="OBeautifulCode.Type" version="1.0.100" />
+      <dependency id="OBeautifulCode.Type.Recipes.AssemblyExtensions" version="1.0.100" />
     </dependencies>
   </metadata>
   <files>
