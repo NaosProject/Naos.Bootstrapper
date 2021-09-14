@@ -6,12 +6,14 @@
     <tags>Bootstrapper</tags>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Drawing" targetFramework="net462" />
     </frameworkAssemblies>
     <dependencies>
       <dependency id="Naos.Bootstrapper.Recipes.Core.Assembly" version="$version$" />
       <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
-      <dependency id="OBeautifulCode.Representation.System" version="1.0.60" />
-      <dependency id="OBeautifulCode.Type" version="1.0.100" />
+      <dependency id="OBeautifulCode.Cloning.Recipes.CloningExtensions" version="1.0.6" />
+      <dependency id="OBeautifulCode.Representation.System" version="1.0.61" />
+      <dependency id="OBeautifulCode.Type" version="1.0.104" />
     </dependencies>
   </metadata>
   <files>

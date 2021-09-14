@@ -8,6 +8,7 @@
       <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="net462" />
       <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework="net462" />
       <frameworkAssembly assemblyName="System.Configuration" targetFramework="net462" />
+      <frameworkAssembly assemblyName="System.Drawing" targetFramework="net462" />
     </frameworkAssemblies>
     <dependencies>
       <dependency id="Naos.Bootstrapper.Recipes.Core.Console" version="$version$" />
