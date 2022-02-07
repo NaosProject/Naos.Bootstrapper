@@ -9,16 +9,16 @@
       <frameworkAssembly assemblyName="System.Drawing" targetFramework="net462" />
     </frameworkAssemblies>
     <dependencies>
-      <dependency id="Naos.Build.Analyzers" version="1.55.54" />
-      <dependency id="Naos.Build.Properties.ProjectInfo" version="1.55.54" />
+      <dependency id="Naos.Build.Analyzers" version="1.55.57" />
+      <dependency id="Naos.Build.Properties.ProjectInfo" version="1.55.57" />
       <dependency id="Naos.CodeAnalysis.Recipes.SuppressBecause" version="1.0.129" />
-      <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.30" />
-      <dependency id="OBeautifulCode.CodeAnalysis.Recipes.SuppressBecause" version="1.0.16" />
-      <dependency id="OBeautifulCode.Collection.Recipes.EnumerableExtensions" version="1.0.50" />
+      <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.33" />
+      <dependency id="OBeautifulCode.CodeAnalysis.Recipes.SuppressBecause" version="1.0.17" />
+      <dependency id="OBeautifulCode.Collection.Recipes.EnumerableExtensions" version="1.0.53" />
       <dependency id="OBeautifulCode.Equality.Recipes.EqualityHelpers" version="1.0.35" />
       <dependency id="OBeautifulCode.Math.Recipes.ThreadSafeRandom" version="1.0.78" />
       <dependency id="OBeautifulCode.String.Recipes.StringExtensions" version="1.0.58" />
-      <dependency id="OBeautifulCode.Type.Recipes.TypeExtensions" version="1.0.104" />
+      <dependency id="OBeautifulCode.Type.Recipes.TypeExtensions" version="1.0.112" />
       <dependency id="StyleCop.Analyzers" version="[1.1.118]" />
     </dependencies>
   </metadata>

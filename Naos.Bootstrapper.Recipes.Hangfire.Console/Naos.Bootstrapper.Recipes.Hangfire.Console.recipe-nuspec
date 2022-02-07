@@ -18,13 +18,13 @@
       <dependency id="Its.Domain" version="[0.15.28]" />
       <dependency id="Its.Domain.Sql" version="[0.15.28]" />
       <dependency id="Its.Validation" version="[1.4.4]" />
-      <dependency id="Naos.Cron" version="1.0.30" />
-      <dependency id="Naos.Cron.Serialization.Json" version="1.0.30" />
-      <dependency id="Naos.MessageBus.Core" version="1.3.35" />
-      <dependency id="Naos.MessageBus.Domain" version="1.3.35" />
-      <dependency id="Naos.MessageBus.Hangfire.Bootstrapper" version="1.3.35" />
-      <dependency id="Naos.MessageBus.Hangfire.Sender" version="1.3.35" />
-      <dependency id="Naos.MessageBus.Persistence" version="1.3.35" />
+      <dependency id="Naos.Cron" version="1.0.31" />
+      <dependency id="Naos.Cron.Serialization.Json" version="1.0.31" />
+      <dependency id="Naos.MessageBus.Core" version="1.3.36" />
+      <dependency id="Naos.MessageBus.Domain" version="1.3.36" />
+      <dependency id="Naos.MessageBus.Hangfire.Bootstrapper" version="1.3.36" />
+      <dependency id="Naos.MessageBus.Hangfire.Sender" version="1.3.36" />
+      <dependency id="Naos.MessageBus.Persistence" version="1.3.36" />
       <dependency id="Newtonsoft.Json" version="[9.0.1]" />
       <dependency id="OBeautifulCode.Enum.Recipes.EnumExtensions" version="1.0.25" />
       <dependency id="OBeautifulCode.Reflection.Recipes.ReflectionHelper" version="1.0.111" />
