@@ -24,12 +24,12 @@
       <dependency id="OBeautifulCode.Compression.Recipes.CompressionHelper" version="1.0.25" />
       <dependency id="OBeautifulCode.Reflection.Recipes.AppDomainHelper" version="1.0.111" />
       <dependency id="OBeautifulCode.Representation.System" version="1.0.62" />
-      <dependency id="OBeautifulCode.Serialization" version="1.0.121" />
-      <dependency id="OBeautifulCode.Serialization.Bson" version="1.0.121" />
-      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.121" />
-      <dependency id="OBeautifulCode.Serialization.PropertyBag" version="1.0.121" />
-      <dependency id="OBeautifulCode.Serialization.Recipes.Factory" version="1.0.121" />
-      <dependency id="OBeautifulCode.Serialization.Recipes.RoundtripSerializationExtensions" version="1.0.121" />
+      <dependency id="OBeautifulCode.Serialization" version="1.0.123" />
+      <dependency id="OBeautifulCode.Serialization.Bson" version="1.0.123" />
+      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.123" />
+      <dependency id="OBeautifulCode.Serialization.PropertyBag" version="1.0.123" />
+      <dependency id="OBeautifulCode.Serialization.Recipes.Factory" version="1.0.123" />
+      <dependency id="OBeautifulCode.Serialization.Recipes.RoundtripSerializationExtensions" version="1.0.123" />
       <dependency id="OBeautifulCode.Type" version="1.0.112" />
       <dependency id="xunit" version="[2.4.1]" />
       <dependency id="xunit.abstractions" version="[2.0.3]" />

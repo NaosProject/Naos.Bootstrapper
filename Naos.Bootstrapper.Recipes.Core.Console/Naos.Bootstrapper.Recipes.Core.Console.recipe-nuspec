@@ -35,11 +35,11 @@
       <dependency id="OBeautifulCode.Math.Recipes.ThreadSafeRandom" version="1.0.78" />
       <dependency id="OBeautifulCode.Process.Recipes.ProcessHelper" version="1.0.11" />
       <dependency id="OBeautifulCode.Representation.System" version="1.0.62" />
-      <dependency id="OBeautifulCode.Serialization" version="1.0.121" />
-      <dependency id="OBeautifulCode.Serialization.Bson" version="1.0.121" />
-      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.121" />
-      <dependency id="OBeautifulCode.Serialization.PropertyBag" version="1.0.121" />
-      <dependency id="OBeautifulCode.Serialization.Recipes.Factory" version="1.0.121" />
+      <dependency id="OBeautifulCode.Serialization" version="1.0.123" />
+      <dependency id="OBeautifulCode.Serialization.Bson" version="1.0.123" />
+      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.123" />
+      <dependency id="OBeautifulCode.Serialization.PropertyBag" version="1.0.123" />
+      <dependency id="OBeautifulCode.Serialization.Recipes.Factory" version="1.0.123" />
       <dependency id="OBeautifulCode.String.Recipes.StringExtensions" version="1.0.58" />
       <dependency id="OBeautifulCode.Type" version="1.0.112" />
       <dependency id="OBeautifulCode.Type.Recipes.TypeExtensions" version="1.0.112" />
