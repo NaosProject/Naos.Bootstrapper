@@ -10,12 +10,12 @@
     <dependencies>
       <dependency id="Naos.Bootstrapper.Recipes.Core.Assembly" version="$version$" />
       <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
-      <dependency id="OBeautifulCode.Compression" version="1.0.25" />
-      <dependency id="OBeautifulCode.Representation.System" version="1.0.62" />
-      <dependency id="OBeautifulCode.Serialization" version="1.0.123" />
-      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.123" />
-      <dependency id="OBeautifulCode.Type" version="1.0.112" />
-      <dependency id="OBeautifulCode.Type.Recipes.AssemblyExtensions" version="1.0.112" />
+      <dependency id="OBeautifulCode.Compression" version="1.0.26" />
+      <dependency id="OBeautifulCode.Representation.System" version="1.0.63" />
+      <dependency id="OBeautifulCode.Serialization" version="1.0.140" />
+      <dependency id="OBeautifulCode.Serialization.Json" version="1.0.140" />
+      <dependency id="OBeautifulCode.Type" version="1.0.119" />
+      <dependency id="OBeautifulCode.Type.Recipes.AssemblyExtensions" version="1.0.119" />
     </dependencies>
   </metadata>
   <files>
