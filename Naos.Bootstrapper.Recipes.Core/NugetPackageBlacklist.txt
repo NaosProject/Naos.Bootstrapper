@@ -50,7 +50,6 @@ OBeautifulCode.Enum
 OBeautifulCode.Enum.EnumExtensions
 OBeautifulCode.Error
 OBeautifulCode.Error.Recipes.ExceptionExtensions
-OBeautifulCode.IO
 OBeautifulCode.IO.DirectoryHelper
 OBeautifulCode.IO.FileHelper
 OBeautifulCode.Libs.Collections
