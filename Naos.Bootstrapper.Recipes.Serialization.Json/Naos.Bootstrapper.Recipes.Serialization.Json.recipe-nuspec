@@ -14,8 +14,8 @@
       <dependency id="OBeautifulCode.Representation.System" version="1.0.63" />
       <dependency id="OBeautifulCode.Serialization" version="1.0.140" />
       <dependency id="OBeautifulCode.Serialization.Json" version="1.0.140" />
-      <dependency id="OBeautifulCode.Type" version="1.0.119" />
-      <dependency id="OBeautifulCode.Type.Recipes.AssemblyExtensions" version="1.0.119" />
+      <dependency id="OBeautifulCode.Type" version="1.0.129" />
+      <dependency id="OBeautifulCode.Type.Recipes.AssemblyExtensions" version="1.0.129" />
     </dependencies>
   </metadata>
   <files>

@@ -52,10 +52,12 @@ namespace OBeautifulCode.Type.Test
 
         public TypeDummyFactory()
         {
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(CurrencyCode.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(CultureKind.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(DateTimeFormatKind.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(MissingProtocolStrategy.Unknown);
             AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(StandardTimeZone.Unknown);
+            AutoFixtureBackedDummyFactory.ConstrainDummyToExclude(TypeSelectionStrategy.Unknown);
 
             // UtcDateTimeRangeInclusive
             AutoFixtureBackedDummyFactory.AddDummyCreator(
@@ -69,6 +71,19 @@ namespace OBeautifulCode.Type.Test
 
                 return result;
             });
+
+            // Range<T>
+            AutoFixtureBackedDummyFactory.AddDummyCreator(
+                () =>
+                {
+                    var start = A.Dummy<Version>();
+
+                    var end = A.Dummy<Version>().ThatIs(_ => _ >= start);
+
+                    var result = new Range<Version>(start, end);
+
+                    return result;
+                });
 
             // Type
             AutoFixtureBackedDummyFactory.AddDummyCreator(

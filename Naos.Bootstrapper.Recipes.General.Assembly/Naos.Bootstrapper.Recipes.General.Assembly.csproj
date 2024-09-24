@@ -87,6 +87,7 @@
     <Compile Include=".recipes\OBeautifulCode.Equality\ObjectEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\ReadOnlyDictionaryEqualityComparer.cs" />
     <Compile Include=".recipes\OBeautifulCode.Equality\ReferenceEqualityComparer{T}.cs" />
+    <Compile Include=".recipes\OBeautifulCode.String\StringExtensions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\ArrayKind.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringReadableOptions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Type\ToStringXmlDocOptions.cs" />

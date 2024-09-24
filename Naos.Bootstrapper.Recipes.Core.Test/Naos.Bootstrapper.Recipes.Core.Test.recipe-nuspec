@@ -13,28 +13,28 @@
     <dependencies>
       <dependency id="AutoFixture" version="[4.11.0]" />
       <dependency id="BouncyCastle" version="[1.8.5]" />
-      <dependency id="Castle.Core" version="[4.4.0]" />
+      <dependency id="Castle.Core" version="[5.1.1]" />
       <dependency id="CLAP" version="[4.6]" />
-      <dependency id="FakeItEasy" version="[6.0.0]" />
+      <dependency id="FakeItEasy" version="[8.3.0]" />
       <dependency id="Fare" version="[2.1.2]" />
       <dependency id="Its.Log" version="[2.9.14]" />
       <dependency id="MongoDB.Bson" version="[2.4.4]" />
       <dependency id="Naos.Build.Analyzers" version="1.55.57" />
       <dependency id="Naos.CodeAnalysis.Recipes.SuppressBecause" version="1.0.129" />
       <dependency id="Naos.Configuration.Domain" version="1.0.27" />
-      <dependency id="Naos.Diagnostics.Domain" version="1.3.41" />
-      <dependency id="Naos.Diagnostics.Recipes.DomainFactory" version="1.3.41" />
-      <dependency id="Naos.Diagnostics.Recipes.MachineMemory" version="1.3.41" />
-      <dependency id="Naos.Diagnostics.Recipes.MachineName" version="1.3.41" />
-      <dependency id="Naos.Diagnostics.Recipes.PerformanceCounter" version="1.3.41" />
+      <dependency id="Naos.Diagnostics.Domain" version="1.3.48" />
+      <dependency id="Naos.Diagnostics.Recipes.DomainFactory" version="1.3.48" />
+      <dependency id="Naos.Diagnostics.Recipes.MachineMemory" version="1.3.48" />
+      <dependency id="Naos.Diagnostics.Recipes.MachineName" version="1.3.48" />
+      <dependency id="Naos.Diagnostics.Recipes.PerformanceCounter" version="1.3.48" />
       <dependency id="Naos.Diagnostics.Recipes.Process" version="1.3.27" />
       <dependency id="Naos.Logging.Domain" version="1.0.81" />
       <dependency id="Naos.Logging.Persistence" version="1.0.81" />
       <dependency id="Naos.Telemetry.Domain" version="1.0.30" />
-      <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.34" />
-      <dependency id="OBeautifulCode.AutoFakeItEasy" version="1.0.140" />
+      <dependency id="OBeautifulCode.Assertion.Recipes.Must" version="1.0.37" />
+      <dependency id="OBeautifulCode.AutoFakeItEasy" version="1.0.141" />
       <dependency id="OBeautifulCode.CodeAnalysis.Recipes.SuppressBecause" version="1.0.19" />
-      <dependency id="OBeautifulCode.CodeGen.ModelObject.Recipes.TestScenarios" version="1.0.179" />
+      <dependency id="OBeautifulCode.CodeGen.ModelObject.Recipes.TestScenarios" version="1.0.189" />
       <dependency id="OBeautifulCode.Collection.Recipes.EnumerableExtensions" version="1.0.60" />
       <dependency id="OBeautifulCode.Compression" version="1.0.26" />
       <dependency id="OBeautifulCode.Compression.Recipes.CompressionHelper" version="1.0.26" />
@@ -55,10 +55,10 @@
       <dependency id="OBeautifulCode.Serialization.Recipes.DummyFactory" version="1.0.140" />
       <dependency id="OBeautifulCode.Serialization.Recipes.Factory" version="1.0.140" />
       <dependency id="OBeautifulCode.Serialization.Recipes.RoundtripSerializationExtensions" version="1.0.140" />
-      <dependency id="OBeautifulCode.String.Recipes.StringExtensions" version="1.0.61" />
-      <dependency id="OBeautifulCode.Type" version="1.0.119" />
-      <dependency id="OBeautifulCode.Type.Recipes.DummyFactory" version="1.0.119" />
-      <dependency id="OBeautifulCode.Type.Recipes.TypeExtensions" version="1.0.119" />
+      <dependency id="OBeautifulCode.String.Recipes.StringExtensions" version="1.0.63" />
+      <dependency id="OBeautifulCode.Type" version="1.0.129" />
+      <dependency id="OBeautifulCode.Type.Recipes.DummyFactory" version="1.0.129" />
+      <dependency id="OBeautifulCode.Type.Recipes.TypeExtensions" version="1.0.129" />
       <dependency id="StyleCop.Analyzers" version="[1.1.118]" />
       <dependency id="xunit" version="[2.4.1]" />
       <dependency id="xunit.abstractions" version="[2.0.3]" />

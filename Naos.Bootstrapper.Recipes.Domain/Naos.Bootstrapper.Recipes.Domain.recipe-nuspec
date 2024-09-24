@@ -13,7 +13,7 @@
       <dependency id="Naos.Bootstrapper.Recipes.Core" version="$version$" />
       <dependency id="OBeautifulCode.Cloning.Recipes.CloningExtensions" version="1.0.6" />
       <dependency id="OBeautifulCode.Representation.System" version="1.0.63" />
-      <dependency id="OBeautifulCode.Type" version="1.0.119" />
+      <dependency id="OBeautifulCode.Type" version="1.0.129" />
     </dependencies>
   </metadata>
   <files>
