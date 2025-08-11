@@ -28,6 +28,13 @@ Naos.Recipes.FluentUri
 Naos.Recipes.Configuration.Bootstrapper
 Naos.Recipes.Configuration.Setup
 Naos.Recipes.InitializeTestProject
+Naos.Recipes.Api.SelfHost.Console.Bootstrapper.Common
+Naos.Recipes.Configuration.Bootstrapper
+Naos.Recipes.Console.Bootstrapper
+Naos.Recipes.Console.Domain
+Naos.Recipes.Console.ExampleConfig
+Naos.Recipes.InitializeTestProject
+Naos.Recipes.MessageBus.Hangfire.Console.Bootstrapper
 
 # --- OBC ----
 OBeautifulCode.AccountingTime.BsonSerialization
