@@ -18,7 +18,7 @@
       <dependency id="FakeItEasy" version="[8.3.0]" />
       <dependency id="Fare" version="[2.1.2]" />
       <dependency id="MongoDB.Bson" version="[2.4.4]" />
-      <dependency id="Naos.Configuration.Domain" version="1.0.29" />
+      <dependency id="Naos.Configuration.Domain" version="1.0.30" />
       <dependency id="OBeautifulCode.AutoFakeItEasy" version="1.0.141" />
       <dependency id="OBeautifulCode.Compression" version="1.0.30" />
       <dependency id="OBeautifulCode.Compression.Recipes.CompressionHelper" version="1.0.30" />

@@ -57,6 +57,7 @@
     <Compile Include=".recipes\OBeautifulCode.Assertion\ApplyBecause.cs" />
     <Compile Include=".recipes\OBeautifulCode.Assertion\AssertionKind.cs" />
     <Compile Include=".recipes\OBeautifulCode.Assertion\AssertionTracker.cs" />
+    <Compile Include=".recipes\OBeautifulCode.Assertion\AssertionTrackerExtensions.cs" />
     <Compile Include=".recipes\OBeautifulCode.Assertion\AssertionTrackerShould.cs" />
     <Compile Include=".recipes\OBeautifulCode.Assertion\AssertionVerificationFailedException.cs" />
     <Compile Include=".recipes\OBeautifulCode.Assertion\Delegates.cs" />

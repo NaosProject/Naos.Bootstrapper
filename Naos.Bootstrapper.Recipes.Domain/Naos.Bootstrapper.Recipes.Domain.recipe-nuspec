@@ -14,6 +14,7 @@
       <dependency id="OBeautifulCode.Cloning.Recipes.CloningExtensions" version="1.0.6" />
       <dependency id="OBeautifulCode.Representation.System" version="1.0.70" />
       <dependency id="OBeautifulCode.Type" version="1.0.153" />
+      <dependency id="OBeautifulCode.Assertion.Recipes.AssertionTrackerExtensions" version="1.0.40" />
     </dependencies>
   </metadata>
   <files>
